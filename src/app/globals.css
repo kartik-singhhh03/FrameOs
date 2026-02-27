@@ -21,6 +21,7 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 88px; /* fixed navbar height + gap */
   overscroll-behavior-x: none;
 }
 
@@ -128,6 +129,11 @@ img, video, svg { max-width: 100%; height: auto; }
 
   .pb-safe { padding-bottom: max(1.5rem, env(safe-area-inset-bottom)); }
   .pt-safe { padding-top:    max(0px,    env(safe-area-inset-top)); }
+
+  /* Smooth anchor scroll offset for all sections */
+  .scroll-anchor {
+    scroll-margin-top: 96px;
+  }
 }
 
 /* Scrollbar */

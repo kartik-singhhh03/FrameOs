@@ -490,6 +490,8 @@ interface QuoteCanvasProps {
   onExport?: () => void;
   isExporting?: boolean;
   onExportQualityChange?: (quality: string) => void;
+  /** Pre-select a template on first render (e.g. from ?template= URL param) */
+  initialTemplateId?: TemplateId | null;
 }
 
 /**
@@ -499,10 +501,10 @@ interface QuoteCanvasProps {
  * so a parent can call html-to-image on it for PNG export.
  */
 const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
-  ({ onExport, isExporting = false, onExportQualityChange }, canvasRef) => {
+  ({ onExport, isExporting = false, onExportQualityChange, initialTemplateId }, canvasRef) => {
     const [s, setS] = useState<CanvasState>(DEFAULT_STATE);
     const [selectedTemplate, setSelectedTemplate] =
-      useState<TemplateId>(DEFAULT_TEMPLATE_ID);
+      useState<TemplateId>(initialTemplateId ?? DEFAULT_TEMPLATE_ID);
 
     // â”€â”€ Scene state â”€â”€
     const [sceneEnabled, setSceneEnabled] = useState(false);

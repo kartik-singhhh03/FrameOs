@@ -41,9 +41,19 @@ const FAQ = [
 
 function CheckIcon({ dark }: { dark?: boolean }) {
   return (
-    <span className={`w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5 ${dark ? "bg-white/20" : "bg-[#ECE7E2]"}`}>
-      <svg className={`w-3 h-3 ${dark ? "text-white" : "text-[#252C25]"}`} fill="currentColor" viewBox="0 0 20 20">
-        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+    <span
+      className={`w-5 h-5 rounded-full flex-shrink-0 flex items-center justify-center mt-0.5 ${dark ? "bg-white/20" : "bg-[#ECE7E2]"}`}
+    >
+      <svg
+        className={`w-3 h-3 ${dark ? "text-white" : "text-[#252C25]"}`}
+        fill="currentColor"
+        viewBox="0 0 20 20"
+      >
+        <path
+          fillRule="evenodd"
+          d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+          clipRule="evenodd"
+        />
       </svg>
     </span>
   );
@@ -56,7 +66,10 @@ function UpgradeButton() {
 
   const handleClick = () => {
     if (status === "loading") return;
-    if (!session) { signIn(undefined, { callbackUrl: "/upgrade" }); return; }
+    if (!session) {
+      signIn(undefined, { callbackUrl: "/upgrade" });
+      return;
+    }
     setLoading(true);
     router.push("/upgrade");
   };
@@ -76,14 +89,16 @@ export default function Pricing() {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
 
   return (
-    <section id="pricing" className="py-24 relative overflow-hidden bg-[#ECE7E2]">
+    <section
+      id="pricing"
+      className="scroll-anchor py-24 relative overflow-hidden bg-[#ECE7E2]"
+    >
       <div className="max-w-5xl mx-auto px-6">
         {/* Heading */}
         <div className="text-center mb-14">
           <span className="section-tag">Pricing</span>
           <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-[#1C1F1C] leading-tight mb-4">
-            Simple, honest{" "}
-            <span className="text-[#AB6D48]">pricing</span>
+            Simple, honest <span className="text-[#AB6D48]">pricing</span>
           </h2>
           <p className="text-[#5A635A] text-lg max-w-lg mx-auto leading-relaxed">
             Free forever. Upgrade to Pro for just{" "}
@@ -95,12 +110,17 @@ export default function Pricing() {
         <div className="grid md:grid-cols-2 gap-6 items-stretch">
           {/* Free Plan */}
           <div className="glass-card rounded-2xl p-8 flex flex-col">
-            <p className="text-xs font-bold uppercase tracking-widest text-[#5A635A] mb-2">Free</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-[#5A635A] mb-2">
+              Free
+            </p>
             <div className="flex items-end gap-1 mb-2">
-              <span className="text-5xl font-extrabold tracking-tight text-[#1C1F1C]">$0</span>
+              <span className="text-5xl font-extrabold tracking-tight text-[#1C1F1C]">
+                $0
+              </span>
             </div>
             <p className="text-sm text-[#5A635A] leading-relaxed mb-8">
-              The full editor, basic templates, and standard export — always free.
+              The full editor, basic templates, and standard export — always
+              free.
             </p>
             <a
               href="/editor"
@@ -119,18 +139,33 @@ export default function Pricing() {
           </div>
 
           {/* Pro Plan */}
-          <div className="rounded-2xl p-8 flex flex-col shadow-md relative" style={{ background: "#252C25" }}>
-            <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-white text-xs font-bold px-4 py-1 rounded-full shadow-md" style={{ background: "#AB6D48" }}>
+          <div
+            className="rounded-2xl p-8 flex flex-col shadow-md relative"
+            style={{ background: "#252C25" }}
+          >
+            <span
+              className="absolute -top-3 left-1/2 -translate-x-1/2 text-white text-xs font-bold px-4 py-1 rounded-full shadow-md"
+              style={{ background: "#AB6D48" }}
+            >
               Most popular
             </span>
-            <p className="text-xs font-bold uppercase tracking-widest text-white/60 mb-2">Pro</p>
+            <p className="text-xs font-bold uppercase tracking-widest text-white/60 mb-2">
+              Pro
+            </p>
             <div className="flex items-end gap-1 mb-1">
-              <span className="text-5xl font-extrabold tracking-tight text-white">$5</span>
-              <span className="text-sm font-medium mb-2 text-white/60">/ month</span>
+              <span className="text-5xl font-extrabold tracking-tight text-white">
+                $5
+              </span>
+              <span className="text-sm font-medium mb-2 text-white/60">
+                / month
+              </span>
             </div>
-            <p className="text-xs text-white/50 mb-2 font-medium">Cancel anytime · No contracts</p>
+            <p className="text-xs text-white/50 mb-2 font-medium">
+              Cancel anytime · No contracts
+            </p>
             <p className="text-sm text-white/70 leading-relaxed mb-8">
-              Remove watermarks, unlock all templates, and export in high resolution.
+              Remove watermarks, unlock all templates, and export in high
+              resolution.
             </p>
             <UpgradeButton />
             <ul className="space-y-3 flex-1">
@@ -160,17 +195,28 @@ export default function Pricing() {
                   className="w-full flex items-center justify-between px-6 py-4 text-left"
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                 >
-                  <span className="text-sm font-bold text-[#1C1F1C]">{item.q}</span>
+                  <span className="text-sm font-bold text-[#1C1F1C]">
+                    {item.q}
+                  </span>
                   <svg
                     className={`w-4 h-4 text-[#5A635A] transition-transform duration-200 flex-shrink-0 ml-4 ${openFaq === i ? "rotate-180" : ""}`}
-                    fill="none" viewBox="0 0 24 24" stroke="currentColor"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
                   >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth={2}
+                      d="M19 9l-7 7-7-7"
+                    />
                   </svg>
                 </button>
                 {openFaq === i && (
                   <div className="px-6 pb-4">
-                    <p className="text-sm text-[#5A635A] leading-relaxed">{item.a}</p>
+                    <p className="text-sm text-[#5A635A] leading-relaxed">
+                      {item.a}
+                    </p>
                   </div>
                 )}
               </div>

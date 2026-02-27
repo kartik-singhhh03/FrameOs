@@ -1,12 +1,16 @@
 "use client";
 
 import { useRef, useState, useCallback } from "react";
+import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Download } from "lucide-react";
 import QuoteCanvas from "@/components/QuoteCanvas";
 import { downloadAsPng } from "@/lib/download";
+import type { TemplateId } from "@/components/templates";
 
 export default function EditorPage() {
+  const searchParams = useSearchParams();
+  const templateParam = searchParams.get("template") as TemplateId | null;
   const canvasRef = useRef<HTMLDivElement>(null);
   const [isExporting, setIsExporting] = useState(false);
   const exportQualityRef = useRef<string>("auto");
@@ -41,8 +45,7 @@ export default function EditorPage() {
     <div
       className="min-h-screen overflow-x-hidden"
       style={{
-        background:
-          "#ECE7E2",
+        background: "#ECE7E2",
         backgroundAttachment: "fixed",
       }}
     >
@@ -144,6 +147,7 @@ export default function EditorPage() {
           onExport={handleDownload}
           isExporting={isExporting}
           onExportQualityChange={handleExportQualityChange}
+          initialTemplateId={templateParam}
         />
       </main>
     </div>
