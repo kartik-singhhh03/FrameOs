@@ -42,23 +42,23 @@ export default function EditorPage() {
       className="min-h-screen overflow-x-hidden"
       style={{
         background:
-          "linear-gradient(135deg, #ede9fe 0%, #ddd6fe 20%, #c4b5fd 45%, #ede9fe 70%, #f5f3ff 100%)",
+          "#ECE7E2",
         backgroundAttachment: "fixed",
       }}
     >
       {/* ── Sticky top bar ──────────────────────────────────── */}
       <header className="sticky top-0 z-40 px-3 sm:px-4 pt-3 sm:pt-4 pb-2">
         <div
-          className="max-w-screen-xl mx-auto flex items-center justify-between px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl border border-white/50 shadow-lg shadow-violet-100/40"
+          className="max-w-screen-xl mx-auto flex items-center justify-between px-4 sm:px-5 py-2.5 sm:py-3 rounded-xl sm:rounded-2xl border border-[#D9D3CC] shadow-lg shadow-violet-100/40"
           style={{
-            background: "rgba(255,255,255,0.55)",
+            background: "rgba(244,241,237,0.95)",
             backdropFilter: "blur(20px)",
           }}
         >
           {/* Back */}
           <Link
             href="/"
-            className="flex items-center gap-1.5 sm:gap-2 text-sm font-semibold text-violet-700 hover:text-violet-900 transition-colors min-h-[44px] px-1"
+            className="flex items-center gap-1.5 sm:gap-2 text-sm font-semibold text-[#1C1F1C] hover:text-[#1C1F1C] transition-colors min-h-[44px] px-1"
             aria-label="Back to landing page"
           >
             <ArrowLeft className="w-4 h-4 flex-shrink-0" />
@@ -67,7 +67,7 @@ export default function EditorPage() {
 
           {/* Logo */}
           <div className="flex items-center gap-1.5 sm:gap-2">
-            <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg sm:rounded-xl bg-gradient-to-br from-violet-600 to-purple-400 flex items-center justify-center shadow-md flex-shrink-0">
+            <span className="w-6 h-6 sm:w-7 sm:h-7 rounded-lg sm:rounded-xl bg-[#252C25] flex items-center justify-center shadow-md flex-shrink-0">
               <svg
                 width="14"
                 height="14"
@@ -105,10 +105,10 @@ export default function EditorPage() {
                 />
               </svg>
             </span>
-            <span className="font-extrabold text-violet-900 tracking-tight text-sm sm:text-base">
+            <span className="font-extrabold text-[#1C1F1C] tracking-tight text-sm sm:text-base">
               FrameOS
             </span>
-            <span className="hidden sm:block text-xs bg-violet-100 text-violet-600 font-bold px-2 py-0.5 rounded-full">
+            <span className="hidden sm:block text-xs bg-[#F4F1ED] text-[#5A635A] font-bold px-2 py-0.5 rounded-full">
               Studio
             </span>
           </div>
@@ -118,7 +118,7 @@ export default function EditorPage() {
             type="button"
             onClick={handleDownload}
             disabled={isExporting}
-            className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-violet-600 to-purple-500 shadow-md shadow-violet-200 hover:from-violet-700 hover:to-purple-600 disabled:opacity-60 transition-all duration-150 min-h-[44px]"
+            className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-[#252C25] to-[#AB6D48] shadow-md shadow-[#D9D3CC] hover:from-[#1F261F] hover:to-[#252C25] disabled:opacity-60 transition-all duration-150 min-h-[44px]"
           >
             <Download className="w-4 h-4" />
             {isExporting ? "Exporting…" : "Download PNG"}
@@ -130,7 +130,7 @@ export default function EditorPage() {
             onClick={handleDownload}
             disabled={isExporting}
             aria-label="Download PNG"
-            className="sm:hidden flex items-center justify-center w-10 h-10 rounded-xl text-white bg-gradient-to-r from-violet-600 to-purple-500 shadow-md disabled:opacity-60 transition-all"
+            className="sm:hidden flex items-center justify-center w-10 h-10 rounded-xl text-white bg-gradient-to-r from-[#252C25] to-[#AB6D48] shadow-md disabled:opacity-60 transition-all"
           >
             <Download className="w-4 h-4" />
           </button>

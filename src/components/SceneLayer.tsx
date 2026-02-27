@@ -47,7 +47,7 @@ function getSceneConfig(type: SceneType, shadowIntensity: number): SceneConfig {
       return {
         wrapperStyle: {
           background:
-            "linear-gradient(135deg, #ede9fe 0%, #ddd6fe 30%, #c4b5fd 55%, #ede9fe 80%, #f5f3ff 100%)",
+            "linear-gradient(135deg, #ECE7E2 0%, #F4F1ED 30%, #D9D3CC 55%, #ECE7E2 80%, #F4F1ED 100%)",
           padding: "56px 64px",
           display: "flex",
           alignItems: "center",
@@ -55,7 +55,7 @@ function getSceneConfig(type: SceneType, shadowIntensity: number): SceneConfig {
           borderRadius: 32,
         },
         innerStyle: {
-          filter: `drop-shadow(0 24px 48px rgba(109,40,217,${0.18 * si + 0.08}))`,
+          filter: `drop-shadow(0 24px 48px rgba(37,44,37,${0.18 * si + 0.08}))`,
         },
       };
 
@@ -63,7 +63,7 @@ function getSceneConfig(type: SceneType, shadowIntensity: number): SceneConfig {
       return {
         wrapperStyle: {
           background:
-            "linear-gradient(160deg, #1a1040 0%, #2a1060 25%, #3b1f80 50%, #1a1040 100%)",
+            "linear-gradient(160deg, #0f1a0f 0%, #1C1F1C 25%, #252C25 50%, #0f1a0f 100%)",
           padding: "56px 64px 76px",
           display: "flex",
           alignItems: "center",
@@ -82,7 +82,7 @@ function getSceneConfig(type: SceneType, shadowIntensity: number): SceneConfig {
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(ellipse 70% 60% at 75% 20%, rgba(139,92,246,0.18) 0%, transparent 70%)",
+            "radial-gradient(ellipse 70% 60% at 75% 20%, rgba(125,160,174,0.18) 0%, transparent 70%)",
           zIndex: 1,
           pointerEvents: "none",
         },
@@ -91,7 +91,7 @@ function getSceneConfig(type: SceneType, shadowIntensity: number): SceneConfig {
     case "soft-studio":
       return {
         wrapperStyle: {
-          background: "#f0eff5",
+          background: "#F4F1ED",
           padding: "60px 68px",
           display: "flex",
           alignItems: "center",
@@ -116,7 +116,7 @@ function getSceneConfig(type: SceneType, shadowIntensity: number): SceneConfig {
           overflow: "hidden",
         },
         innerStyle: {
-          filter: `drop-shadow(0 0 ${Math.round(32 + 32 * si)}px rgba(139,92,246,${0.3 * si + 0.15}))`,
+          filter: `drop-shadow(0 0 ${Math.round(32 + 32 * si)}px rgba(171,109,72,${0.3 * si + 0.15}))`,
           position: "relative",
           zIndex: 2,
         },
@@ -125,7 +125,7 @@ function getSceneConfig(type: SceneType, shadowIntensity: number): SceneConfig {
           position: "absolute",
           inset: 0,
           background:
-            "radial-gradient(ellipse 60% 55% at 50% 50%, rgba(139,92,246,0.22) 0%, rgba(79,70,229,0.08) 45%, transparent 75%)",
+            "radial-gradient(ellipse 60% 55% at 50% 50%, rgba(171,109,72,0.22) 0%, rgba(37,44,37,0.08) 45%, transparent 75%)",
           zIndex: 1,
           pointerEvents: "none",
         },

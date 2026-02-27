@@ -1,118 +1,79 @@
+const ICONS = [
+  // Smart Auto Formatting
+  <svg key={0} className="w-5 h-5 text-[#252C25]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 10h12M4 14h16M4 18h10" /></svg>,
+  // Template Library
+  <svg key={1} className="w-5 h-5 text-[#252C25]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 5a1 1 0 011-1h4a1 1 0 011 1v5a1 1 0 01-1 1H5a1 1 0 01-1-1V5zm10 0a1 1 0 011-1h4a1 1 0 011 1v3a1 1 0 01-1 1h-4a1 1 0 01-1-1V5zM4 15a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1H5a1 1 0 01-1-1v-4zm10 0a1 1 0 011-1h4a1 1 0 011 1v4a1 1 0 01-1 1h-4a1 1 0 01-1-1v-4z" /></svg>,
+  // Social Post Templates
+  <svg key={2} className="w-5 h-5 text-[#252C25]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" /></svg>,
+  // Scene Mode
+  <svg key={3} className="w-5 h-5 text-[#252C25]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" /></svg>,
+  // Word Emphasis
+  <svg key={4} className="w-5 h-5 text-[#252C25]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z" /></svg>,
+  // Typography
+  <svg key={5} className="w-5 h-5 text-[#252C25]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 6h16M4 12h16M4 18h7" /></svg>,
+  // Backgrounds
+  <svg key={6} className="w-5 h-5 text-[#252C25]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" /></svg>,
+  // Export
+  <svg key={7} className="w-5 h-5 text-[#252C25]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" /></svg>,
+];
+
 const features = [
-  {
-    emoji: "✨",
-    title: "Smart Auto Formatting",
-    desc: "Intelligent rule-based text layout that auto-sizes, balances lines, and picks the perfect line-height for every quote — instantly.",
-    color: "from-violet-50 to-purple-50",
-    border: "border-violet-200/50",
-    accent: "text-violet-600",
-  },
-  {
-    emoji: "🎨",
-    title: "Beautiful Template Library",
-    desc: "Mac window, minimal card, polaroid, glass frame, browser — choose from hand-crafted Frame templates built for pixel-perfect results.",
-    color: "from-fuchsia-50 to-pink-50",
-    border: "border-fuchsia-200/50",
-    accent: "text-fuchsia-600",
-  },
-  {
-    emoji: "📱",
-    title: "Social Post Templates",
-    desc: "Export-ready templates for Twitter/X, LinkedIn, Instagram, Threads, Notion, and code snippets. Designed for virality.",
-    color: "from-indigo-50 to-blue-50",
-    border: "border-indigo-200/50",
-    accent: "text-indigo-600",
-  },
-  {
-    emoji: "🖼",
-    title: "Scene / Studio Mode",
-    desc: "Drop your design into realistic scenes — desktop, portrait, landscape, tablet — for polished launch screenshots.",
-    color: "from-emerald-50 to-teal-50",
-    border: "border-emerald-200/50",
-    accent: "text-emerald-600",
-  },
-  {
-    emoji: "🎯",
-    title: "Word Emphasis Styling",
-    desc: "Highlight key words with colour, underline, pill, or glow — auto-detected from your quote or manually selected.",
-    color: "from-orange-50 to-amber-50",
-    border: "border-orange-200/50",
-    accent: "text-orange-600",
-  },
-  {
-    emoji: "🎛",
-    title: "Advanced Typography",
-    desc: "16 premium fonts, full weight control, letter-spacing, line-height, text transforms, and drop shadow fine-tuning.",
-    color: "from-violet-50 to-indigo-50",
-    border: "border-violet-200/50",
-    accent: "text-violet-600",
-  },
-  {
-    emoji: "💎",
-    title: "Professional Backgrounds",
-    desc: "Solid colours, gradient presets, custom hex, image upload with blur slider, noise texture, and grain overlay.",
-    color: "from-purple-50 to-fuchsia-50",
-    border: "border-purple-200/50",
-    accent: "text-purple-600",
-  },
-  {
-    emoji: "📥",
-    title: "High-Resolution Export",
-    desc: "Export at 1x, 2x, or 4K quality. Pixel-perfect PNG output that matches the live preview exactly — watermark-free on Pro.",
-    color: "from-slate-50 to-violet-50",
-    border: "border-slate-200/50",
-    accent: "text-slate-600",
-  },
+  { title: "Smart Auto Formatting",    desc: "Intelligent rule-based text layout that auto-sizes, balances lines, and picks the perfect line-height for every quote — instantly." },
+  { title: "Beautiful Template Library", desc: "Mac window, minimal card, polaroid, glass frame, browser — choose from hand-crafted Frame templates built for pixel-perfect results." },
+  { title: "Social Post Templates",    desc: "Export-ready templates for Twitter/X, LinkedIn, Instagram, Threads, Notion, and code snippets. Designed for virality." },
+  { title: "Scene / Studio Mode",      desc: "Drop your design into realistic scenes — desktop, portrait, landscape, tablet — for polished launch screenshots." },
+  { title: "Word Emphasis Styling",    desc: "Highlight key words with colour, underline, pill, or glow — auto-detected from your quote or manually selected." },
+  { title: "Advanced Typography",      desc: "16 premium fonts, full weight control, letter-spacing, line-height, text transforms, and drop shadow fine-tuning." },
+  { title: "Professional Backgrounds", desc: "Solid colours, gradient presets, custom hex, image upload with blur slider, noise texture, and grain overlay." },
+  { title: "High-Resolution Export",   desc: "Export at 1x, 2x, or 4K quality. Pixel-perfect PNG output that matches the live preview exactly — watermark-free on Pro." },
 ];
 
 export default function Features() {
   return (
-    <section id="features" className="py-24 relative">
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[400px] bg-violet-200/20 rounded-full blur-[100px]" />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6 relative">
+    <section id="features" className="py-24 relative bg-[#ECE7E2]">
+      <div className="max-w-7xl mx-auto px-6">
         {/* Heading */}
         <div className="text-center mb-16">
           <span className="section-tag">Features</span>
-          <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight text-violet-950 leading-tight mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold tracking-tight text-[#1C1F1C] leading-tight mb-4">
             Everything a creator{" "}
-            <span className="text-gradient">actually needs</span>
+            <span className="text-[#AB6D48]">actually needs</span>
           </h2>
-          <p className="text-violet-500 text-lg max-w-xl mx-auto leading-relaxed">
+          <p className="text-[#5A635A] text-lg max-w-xl mx-auto leading-relaxed">
             No bloat. No complexity. Just the tools that make your content look
             stunning and spread fast.
           </p>
         </div>
 
-        {/* Feature cards — 4 col grid */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        {/* Feature cards */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {features.map((f, i) => (
             <div
               key={i}
-              className={`glass-card rounded-3xl p-6 hover:shadow-2xl hover:shadow-violet-200/50 transition-all duration-300 hover:-translate-y-1 group border ${f.border}`}
+              className="glass-card rounded-2xl p-6 hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 group"
             >
-              <div className={`w-11 h-11 rounded-2xl bg-gradient-to-br ${f.color} flex items-center justify-center mb-5 shadow-sm group-hover:scale-110 transition-transform duration-300 text-xl`}>
-                {f.emoji}
+              <div className="w-10 h-10 rounded-xl bg-[#ECE7E2] border border-[#D9D3CC] flex items-center justify-center mb-5 group-hover:bg-[#252C25] transition-colors duration-300">
+                <div className="group-hover:[&_svg]:text-white transition-colors duration-300">
+                  {ICONS[i]}
+                </div>
               </div>
-              <h3 className="text-sm font-bold text-violet-950 mb-2">{f.title}</h3>
-              <p className="text-violet-500 text-xs leading-relaxed">{f.desc}</p>
+              <h3 className="text-sm font-bold text-[#1C1F1C] mb-2">{f.title}</h3>
+              <p className="text-[#5A635A] text-xs leading-relaxed">{f.desc}</p>
             </div>
           ))}
         </div>
 
         {/* Stats row */}
-        <div className="mt-14 glass-card rounded-3xl p-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+        <div className="mt-12 glass-card rounded-2xl p-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {[
-            { val: "10×", label: "Faster than Canva" },
-            { val: "20+", label: "Ready-made templates" },
-            { val: "4K", label: "Export resolution" },
+            { val: "10×",  label: "Faster than Canva" },
+            { val: "20+",  label: "Ready-made templates" },
+            { val: "4K",   label: "Export resolution" },
             { val: "4.9★", label: "Average user rating" },
           ].map((stat, i) => (
             <div key={i} className="space-y-1">
-              <p className="text-3xl font-extrabold text-gradient">{stat.val}</p>
-              <p className="text-sm text-violet-500 font-medium">{stat.label}</p>
+              <p className="text-3xl font-extrabold text-[#252C25]">{stat.val}</p>
+              <p className="text-sm text-[#5A635A] font-medium">{stat.label}</p>
             </div>
           ))}
         </div>

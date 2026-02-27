@@ -39,22 +39,22 @@ export default function TemplateSelector({
 
   return (
     <div className="space-y-3">
-      <p className="text-[11px] font-extrabold text-violet-400 uppercase tracking-widest">
+      <p className="text-[11px] font-extrabold text-[#5A635A] uppercase tracking-widest">
         Template
       </p>
 
       {/* Category tabs */}
-      <div className="flex gap-1 p-1 rounded-xl bg-white/40 border border-white/60">
+      <div className="flex gap-1 p-1 rounded-xl bg-[#F4F1ED]/60 border border-[#D9D3CC]">
         {TAB_LABELS.map((tab) => (
           <button
             key={tab.value}
             type="button"
             onClick={() => setActiveTab(tab.value)}
             className={[
-              "flex-1 text-[11px] font-bold rounded-lg py-1.5 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500",
+              "flex-1 text-[11px] font-bold rounded-lg py-1.5 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25]",
               activeTab === tab.value
-                ? "bg-violet-600 text-white shadow"
-                : "text-violet-500 hover:text-violet-700 hover:bg-violet-50",
+                ? "bg-[#252C25] text-white shadow"
+                : "text-[#5A635A] hover:text-[#1C1F1C] hover:bg-[#ECE7E2]",
             ].join(" ")}
           >
             {tab.label}
@@ -88,19 +88,19 @@ export default function TemplateSelector({
               aria-pressed={isActive}
               onClick={() => (isLocked ? undefined : onChange(t.id))}
               className={[
-                "group flex flex-col items-center gap-2 rounded-2xl border p-2.5 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500 relative",
+                "group flex flex-col items-center gap-2 rounded-2xl border p-2.5 transition-all duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25] relative",
                 isLocked
-                  ? "bg-white/40 border-white/50 text-violet-300 cursor-not-allowed opacity-70"
+                  ? "bg-[#F4F1ED]/60 border-[#D9D3CC] text-[#D9D3CC] cursor-not-allowed opacity-70"
                   : isActive
-                    ? "bg-violet-600 border-violet-600 text-white shadow-lg shadow-violet-300/40 scale-105"
-                    : "bg-white/60 border-white/70 text-violet-600 hover:bg-violet-50 hover:border-violet-200 hover:scale-105",
+                    ? "bg-[#252C25] border-[#252C25] text-white shadow-lg shadow-[#D9D3CC]/40 scale-105"
+                    : "bg-[#F4F1ED] border-[#D9D3CC] text-[#5A635A] hover:bg-[#ECE7E2] hover:border-[#D9D3CC] hover:scale-105",
               ].join(" ")}
             >
               <TemplateMiniPreview id={t.id} active={isActive} />
               <span
                 className={[
                   "text-[9px] font-bold tracking-wide text-center leading-tight w-full truncate",
-                  isActive ? "text-white" : "text-violet-600",
+                  isActive ? "text-white" : "text-[#5A635A]",
                 ].join(" ")}
               >
                 {t.name}
@@ -137,15 +137,15 @@ interface MiniPreviewProps {
 
 function TemplateMiniPreview({ id, active }: MiniPreviewProps) {
   const cardBg = active
-    ? "bg-white/20 border-white/50"
-    : "bg-violet-50 border-violet-200";
+    ? "bg-white/20 border-[#D9D3CC]"
+    : "bg-[#ECE7E2] border-[#D9D3CC]";
   const dotColors = active
     ? ["bg-red-400", "bg-yellow-400", "bg-green-400"]
     : ["bg-red-400/70", "bg-yellow-400/70", "bg-green-400/70"];
-  const barBg = active ? "bg-white/30" : "bg-violet-100";
-  const barText = active ? "bg-white/50" : "bg-violet-200";
-  const contentBg = active ? "bg-white/10" : "bg-violet-100/60";
-  const stripBg = active ? "bg-white/40" : "bg-violet-300/60";
+  const barBg = active ? "bg-white/30" : "bg-[#F4F1ED]";
+  const barText = active ? "bg-white/50" : "bg-[#D9D3CC]";
+  const contentBg = active ? "bg-white/10" : "bg-[#F4F1ED]/60";
+  const stripBg = active ? "bg-[#F4F1ED]/60" : "bg-[#D9D3CC]/60";
 
   // ── Frames ──────────────────────────────────────────────────────────
   if (id === "mac-window") {
@@ -170,7 +170,7 @@ function TemplateMiniPreview({ id, active }: MiniPreviewProps) {
         style={{ backdropFilter: "blur(4px)" }}
       >
         <div
-          className={`w-8 h-4 rounded ${active ? "bg-white/30" : "bg-violet-200/80"}`}
+          className={`w-8 h-4 rounded ${active ? "bg-white/30" : "bg-[#D9D3CC]/80"}`}
         />
       </div>
     );
@@ -199,10 +199,10 @@ function TemplateMiniPreview({ id, active }: MiniPreviewProps) {
         style={{ transform: "rotate(-2deg)" }}
       >
         <div
-          className={`w-10 h-9 rounded-sm border-2 ${active ? "border-white/70 bg-white/20" : "border-zinc-300 bg-white"} flex flex-col`}
+          className={`w-10 h-9 rounded-sm border-2 ${active ? "border-[#D9D3CC] bg-white/20" : "border-zinc-300 bg-white"} flex flex-col`}
         >
           <div
-            className={`flex-1 m-1 rounded-sm ${active ? "bg-white/30" : "bg-violet-100"}`}
+            className={`flex-1 m-1 rounded-sm ${active ? "bg-white/30" : "bg-[#F4F1ED]"}`}
           />
           <div className={`h-2 ${active ? "bg-white/20" : "bg-white"}`} />
         </div>
@@ -213,10 +213,10 @@ function TemplateMiniPreview({ id, active }: MiniPreviewProps) {
   if (id === "clean-card") {
     return (
       <div
-        className={`w-12 h-9 rounded border overflow-hidden flex flex-col ${active ? "border-white/50 bg-white/20" : "border-zinc-200 bg-white"}`}
+        className={`w-12 h-9 rounded border overflow-hidden flex flex-col ${active ? "border-[#D9D3CC] bg-white/20" : "border-zinc-200 bg-white"}`}
       >
         <div
-          className={`h-0.5 w-full ${active ? "bg-white/60" : "bg-gradient-to-r from-violet-400 to-indigo-400"}`}
+          className={`h-0.5 w-full ${active ? "bg-[#F4F1ED]" : "bg-gradient-to-r from-violet-400 to-indigo-400"}`}
         />
         <div className="flex-1 m-1 flex flex-col gap-0.5 justify-center">
           <div className={`h-1 rounded ${stripBg}`} />
@@ -227,9 +227,9 @@ function TemplateMiniPreview({ id, active }: MiniPreviewProps) {
   }
 
   // ── Social ───────────────────────────────────────────────────────────
-  const bg = active ? "rgba(124,58,237,0.25)" : "#f5f3ff";
-  const accent = active ? "rgba(255,255,255,0.6)" : "#7c3aed";
-  const muted = active ? "rgba(255,255,255,0.3)" : "#c4b5fd";
+  const bg = active ? "rgba(37,44,37,0.12)" : "#F4F1ED";
+  const accent = active ? "rgba(255,255,255,0.8)" : "#252C25";
+  const muted = active ? "rgba(255,255,255,0.45)" : "#D9D3CC";
 
   if (id === "twitter-post") {
     return (

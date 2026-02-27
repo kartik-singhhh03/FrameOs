@@ -124,7 +124,7 @@ const FONT_WEIGHTS = [
 ];
 
 const GRADIENT_PRESETS = [
-  { label: "Violet Dream", value: "linear-gradient(135deg, #7c3aed, #4f46e5)" },
+  { label: "Violet Dream", value: "linear-gradient(135deg, #252C25, #AB6D48)" },
   { label: "Sunset Blaze", value: "linear-gradient(135deg, #f97316, #ec4899)" },
   { label: "Ocean Drift", value: "linear-gradient(135deg, #0ea5e9, #6366f1)" },
   { label: "Midnight", value: "linear-gradient(135deg, #0f0c29, #302b63)" },
@@ -270,8 +270,8 @@ const DEFAULT_STATE: CanvasState = {
   borderRadius: 24,
   shadowEnabled: true,
   textColor: "#ffffff",
-  backgroundColor: "#7c3aed",
-  backgroundGradient: "linear-gradient(135deg, #7c3aed, #4f46e5)",
+  backgroundColor: "#252C25",
+  backgroundGradient: "linear-gradient(135deg, #252C25, #AB6D48)",
   backgroundImage: null,
   aspectRatio: "1:1",
 };
@@ -300,8 +300,8 @@ function SliderRow({
   return (
     <div className="space-y-1">
       <div className="flex justify-between items-center">
-        <label className="text-xs font-semibold text-violet-700">{label}</label>
-        <span className="text-xs font-mono text-violet-400 tabular-nums">
+        <label className="text-xs font-semibold text-[#1C1F1C]">{label}</label>
+        <span className="text-xs font-mono text-[#5A635A] tabular-nums">
           {value}
           {unit}
         </span>
@@ -314,7 +314,7 @@ function SliderRow({
         value={value}
         onChange={(e) => onChange(Number(e.target.value))}
         aria-label={label}
-        className="w-full accent-violet-600 cursor-pointer"
+        className="w-full accent-[#252C25] cursor-pointer"
       />
     </div>
   );
@@ -350,14 +350,14 @@ function ControlGroup({
         tabIndex={isCollapsible ? 0 : -1}
         aria-expanded={isCollapsible ? !collapsed : undefined}
       >
-        <span className="text-[11px] font-extrabold text-violet-400 uppercase tracking-widest">
+        <span className="text-[11px] font-extrabold text-[#5A635A] uppercase tracking-widest">
           {label}
         </span>
         {isCollapsible &&
           (collapsed ? (
-            <ChevronRight className="w-3.5 h-3.5 text-violet-400 flex-shrink-0" />
+            <ChevronRight className="w-3.5 h-3.5 text-[#5A635A] flex-shrink-0" />
           ) : (
-            <ChevronDown className="w-3.5 h-3.5 text-violet-400 flex-shrink-0" />
+            <ChevronDown className="w-3.5 h-3.5 text-[#5A635A] flex-shrink-0" />
           ))}
       </button>
       {(!isCollapsible || !collapsed) && (
@@ -873,7 +873,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
       ? `${shadowConfig.offsetX}px ${shadowConfig.offsetY}px ${shadowConfig.blur}px rgba(0,0,0,${shadowConfig.opacity})`
       : undefined;
     const boxShadow = shadowConfig.enabled
-      ? "0 24px 56px rgba(109,40,217,0.28)"
+      ? "0 24px 56px rgba(37,44,37,0.18)"
       : undefined;
 
     // -- Quote canvas JSX (reused in both scene and bare modes) --
@@ -1038,7 +1038,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
             className="relative flex items-start justify-center rounded-2xl sm:rounded-3xl p-4 sm:p-8 w-full"
             style={{
               background:
-                "radial-gradient(ellipse at 50% 30%, rgba(196,181,253,0.24) 0%, rgba(245,243,255,0.10) 70%)",
+                "radial-gradient(ellipse at 50% 30%, rgba(171,109,72,0.10) 0%, rgba(236,231,226,0.05) 70%)",
             }}
           >
             {/* Scale wrapper: shrinks for display only; export captures native size */}
@@ -1076,16 +1076,16 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
         {/* â•â• RIGHT PANE: Controls panel â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â• */}
         <div className="w-full lg:w-[380px] xl:w-[420px] flex-shrink-0 min-w-0">
           <div
-            className="bg-white/55 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-white/60 shadow-xl overflow-hidden"
+            className="bg-[#F4F1ED]/95 backdrop-blur-xl rounded-2xl sm:rounded-3xl border border-[#D9D3CC] shadow-xl overflow-hidden"
             style={{ WebkitBackdropFilter: "blur(24px)" }}
           >
-            <div className="divide-y divide-violet-100/60">
+            <div className="divide-y divide-[#D9D3CC]/60">
               {/* Pro Plan Banner */}
               <div className="px-4 sm:px-5 py-3">
                 {isPro ? (
-                  <div className="flex items-center gap-2 bg-gradient-to-r from-violet-600 to-purple-600 rounded-2xl px-4 py-2.5">
+                  <div className="flex items-center gap-2 bg-[#252C25] rounded-2xl px-4 py-2.5">
                     <svg
-                      className="w-3.5 h-3.5 text-violet-200 flex-shrink-0"
+                      className="w-3.5 h-3.5 text-white/70 flex-shrink-0"
                       fill="currentColor"
                       viewBox="0 0 20 20"
                     >
@@ -1098,7 +1098,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                     <span className="text-xs font-bold text-white">
                       Pro Plan Active
                     </span>
-                    <span className="text-[10px] text-violet-200 ml-1">
+                    <span className="text-[10px] text-white/60 ml-1">
                       All features unlocked
                     </span>
                   </div>
@@ -1114,7 +1114,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                     </div>
                     <a
                       href="/upgrade"
-                      className="text-[10px] font-bold text-violet-700 bg-violet-100 hover:bg-violet-200 px-2.5 py-1.5 rounded-xl transition-colors whitespace-nowrap"
+                      className="text-[10px] font-bold text-[#252C25] bg-[#F4F1ED] hover:bg-[#ECE7E2] px-2.5 py-1.5 rounded-xl transition-colors whitespace-nowrap"
                     >
                       Upgrade $5/mo
                     </a>
@@ -1135,7 +1135,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                     onChange={(e) => set({ quote: e.target.value })}
                     placeholder="Enter your quoteâ€¦"
                     aria-label="Quote text"
-                    className="w-full rounded-2xl border border-violet-200 bg-white/70 px-3 py-2.5 text-sm text-violet-900 placeholder-violet-300 resize-none focus:outline-none focus:ring-2 focus:ring-violet-400 transition leading-relaxed"
+                    className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] placeholder-[#5A635A]/50 resize-none focus:outline-none focus:ring-2 focus:ring-[#252C25] transition leading-relaxed"
                     style={{ wordBreak: "break-word" }}
                   />
                   <input
@@ -1144,7 +1144,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                     onChange={(e) => set({ author: e.target.value })}
                     placeholder="â€” Author name"
                     aria-label="Author"
-                    className="w-full rounded-2xl border border-violet-200 bg-white/70 px-3 py-2.5 text-sm text-violet-900 placeholder-violet-300 focus:outline-none focus:ring-2 focus:ring-violet-400 transition"
+                    className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] placeholder-[#5A635A]/50 focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
                   />
                 </ControlGroup>
               </div>
@@ -1174,7 +1174,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                       }
                     }}
                     aria-label="Font style preset"
-                    className="w-full rounded-2xl border border-violet-200 bg-white/70 px-3 py-2.5 text-sm text-violet-900 focus:outline-none focus:ring-2 focus:ring-violet-400 transition"
+                    className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
                   >
                     <option value="">— Custom font —</option>
                     {(
@@ -1194,7 +1194,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                     value={s.fontFamily}
                     onChange={(e) => set({ fontFamily: e.target.value })}
                     aria-label="Font family"
-                    className="w-full rounded-2xl border border-violet-200 bg-white/70 px-3 py-2.5 text-sm text-violet-900 focus:outline-none focus:ring-2 focus:ring-violet-400 transition"
+                    className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
                   >
                     {FONT_CATEGORIES.map((cat) => (
                       <optgroup key={cat.label} label={cat.label}>
@@ -1220,8 +1220,8 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                         className={[
                           "flex-1 min-w-[3rem] px-2 py-1 rounded-xl border text-xs transition-all duration-150",
                           s.fontWeight === fw.value
-                            ? "bg-violet-600 border-violet-600 text-white shadow-sm"
-                            : "bg-white/60 border-white/60 text-violet-600 hover:bg-violet-50 hover:border-violet-200",
+                            ? "bg-[#252C25] border-[#252C25] text-white shadow-sm"
+                            : "bg-[#F4F1ED] border-[#D9D3CC] text-[#5A635A] hover:bg-[#ECE7E2] hover:border-[#D9D3CC]",
                         ].join(" ")}
                       >
                         {fw.value}
@@ -1267,8 +1267,8 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                         className={[
                           "flex-1 flex items-center justify-center rounded-2xl border transition-all duration-150",
                           s.textAlign === value
-                            ? "bg-violet-600 border-violet-600 text-white shadow-md shadow-violet-200"
-                            : "bg-white/60 border-white/60 text-violet-500 hover:bg-violet-50 hover:border-violet-200",
+                            ? "bg-[#252C25] border-[#252C25] text-white shadow-md shadow-[#D9D3CC]"
+                            : "bg-[#F4F1ED] border-[#D9D3CC] text-[#5A635A] hover:bg-[#ECE7E2] hover:border-[#D9D3CC]",
                         ].join(" ")}
                       >
                         {icon}
@@ -1291,8 +1291,8 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                         className={[
                           "flex-1 px-1 py-1 rounded-xl border text-[10px] font-bold transition-all duration-150 truncate",
                           s.textTransform === t
-                            ? "bg-violet-600 border-violet-600 text-white"
-                            : "bg-white/60 border-white/60 text-violet-600 hover:bg-violet-50 hover:border-violet-200",
+                            ? "bg-[#252C25] border-[#252C25] text-white"
+                            : "bg-[#F4F1ED] border-[#D9D3CC] text-[#5A635A] hover:bg-[#ECE7E2] hover:border-[#D9D3CC]",
                         ].join(" ")}
                       >
                         {t === "none"
@@ -1312,7 +1312,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                     style={{ minHeight: 44 }}
                   >
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-semibold text-violet-700">
+                      <span className="text-xs font-semibold text-[#1C1F1C]">
                         &ldquo; Mark
                       </span>
                       <button
@@ -1322,8 +1322,8 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                         aria-label="Show quotation mark"
                         onClick={() => set({ showQuoteMark: !s.showQuoteMark })}
                         className={[
-                          "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500",
-                          s.showQuoteMark ? "bg-violet-600" : "bg-violet-200",
+                          "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25]",
+                          s.showQuoteMark ? "bg-[#252C25]" : "bg-[#D9D3CC]",
                         ].join(" ")}
                       >
                         <span
@@ -1336,7 +1336,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                     </div>
                     <div className="flex items-center gap-2">
                       <label
-                        className="text-xs font-semibold text-violet-700"
+                        className="text-xs font-semibold text-[#1C1F1C]"
                         htmlFor="qc-text-color"
                       >
                         Text color
@@ -1347,7 +1347,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                         value={s.textColor}
                         onChange={(e) => set({ textColor: e.target.value })}
                         aria-label="Text color"
-                        className="w-10 h-9 rounded-xl border border-violet-200 cursor-pointer bg-transparent"
+                        className="w-10 h-9 rounded-xl border border-[#D9D3CC] cursor-pointer bg-transparent"
                       />
                     </div>
                   </div>
@@ -1368,10 +1368,10 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                     style={{ minHeight: 44 }}
                   >
                     <div>
-                      <span className="text-xs font-semibold text-violet-700 block">
+                      <span className="text-xs font-semibold text-[#1C1F1C] block">
                         Smart Format
                       </span>
-                      <span className="text-[10px] text-violet-400">
+                      <span className="text-[10px] text-[#5A635A]">
                         Auto line-break &amp; font scale
                       </span>
                     </div>
@@ -1382,8 +1382,8 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                       aria-label="Smart Format"
                       onClick={() => setAutoFormatEnabled((v) => !v)}
                       className={[
-                        "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500",
-                        autoFormatEnabled ? "bg-violet-600" : "bg-violet-200",
+                        "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25]",
+                        autoFormatEnabled ? "bg-[#252C25]" : "bg-[#D9D3CC]",
                       ].join(" ")}
                     >
                       <span
@@ -1397,7 +1397,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
 
                   {/* Emphasis type */}
                   <div className="space-y-2">
-                    <p className="text-[10px] font-bold text-violet-400 uppercase tracking-wider">
+                    <p className="text-[10px] font-bold text-[#5A635A] uppercase tracking-wider">
                       Word emphasis
                     </p>
                     <div className="grid grid-cols-5 gap-1.5">
@@ -1422,8 +1422,8 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                           className={[
                             "px-1 py-1.5 rounded-xl border text-[9px] font-bold uppercase tracking-wide transition-all duration-150 truncate",
                             emphasisConfig.type === t
-                              ? "bg-violet-600 border-violet-600 text-white"
-                              : "bg-white/60 border-white/60 text-violet-600 hover:bg-violet-50 hover:border-violet-200",
+                              ? "bg-[#252C25] border-[#252C25] text-white"
+                              : "bg-[#F4F1ED] border-[#D9D3CC] text-[#5A635A] hover:bg-[#ECE7E2] hover:border-[#D9D3CC]",
                           ].join(" ")}
                         >
                           {t}
@@ -1439,7 +1439,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                         className="flex items-center gap-3"
                         style={{ minHeight: 44 }}
                       >
-                        <label className="text-xs font-semibold text-violet-700 shrink-0">
+                        <label className="text-xs font-semibold text-[#1C1F1C] shrink-0">
                           Emphasis color
                         </label>
                         <input
@@ -1452,9 +1452,9 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                             }))
                           }
                           aria-label="Emphasis colour"
-                          className="w-10 h-9 rounded-xl border border-violet-200 cursor-pointer bg-transparent"
+                          className="w-10 h-9 rounded-xl border border-[#D9D3CC] cursor-pointer bg-transparent"
                         />
-                        <span className="text-xs font-mono text-violet-400">
+                        <span className="text-xs font-mono text-[#5A635A]">
                           {emphasisConfig.color}
                         </span>
                       </div>
@@ -1463,15 +1463,15 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                   {/* Detected emphasis words preview */}
                   {autoFormatEnabled &&
                     formatResult.emphasizedWords.length > 0 && (
-                      <div className="rounded-xl bg-violet-50 border border-violet-100 px-3 py-2">
-                        <p className="text-[10px] font-bold text-violet-400 uppercase tracking-wider mb-1.5">
+                      <div className="rounded-xl bg-[#ECE7E2] border border-[#D9D3CC] px-3 py-2">
+                        <p className="text-[10px] font-bold text-[#5A635A] uppercase tracking-wider mb-1.5">
                           Auto-detected words
                         </p>
                         <div className="flex flex-wrap gap-1.5">
                           {formatResult.emphasizedWords.map((w) => (
                             <span
                               key={w}
-                              className="px-2 py-0.5 rounded-full bg-violet-100 text-violet-700 text-[11px] font-semibold"
+                              className="px-2 py-0.5 rounded-full bg-[#F4F1ED] text-[#1C1F1C] text-[11px] font-semibold"
                             >
                               {w}
                             </span>
@@ -1492,7 +1492,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                 >
                   {/* Gradient presets */}
                   <div>
-                    <p className="text-[10px] font-bold text-violet-400 uppercase tracking-wider mb-2">
+                    <p className="text-[10px] font-bold text-[#5A635A] uppercase tracking-wider mb-2">
                       Gradients
                     </p>
                     <div className="grid grid-cols-5 gap-2">
@@ -1514,7 +1514,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                             "h-9 rounded-xl transition-all duration-150 hover:scale-105",
                             s.backgroundGradient === g.value &&
                             !s.backgroundImage
-                              ? "ring-2 ring-violet-600 ring-offset-2 scale-105"
+                              ? "ring-2 ring-[#252C25] ring-offset-2 scale-105"
                               : "",
                           ].join(" ")}
                         />
@@ -1524,7 +1524,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
 
                   {/* Preset solid colors */}
                   <div>
-                    <p className="text-[10px] font-bold text-violet-400 uppercase tracking-wider mb-2">
+                    <p className="text-[10px] font-bold text-[#5A635A] uppercase tracking-wider mb-2">
                       Preset colors
                     </p>
                     <div className="flex flex-wrap gap-2">
@@ -1550,10 +1550,10 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                             s.backgroundColor === c.value &&
                             !s.backgroundImage &&
                             !s.backgroundGradient.startsWith("linear")
-                              ? "ring-2 ring-violet-600 ring-offset-2 scale-110"
+                              ? "ring-2 ring-[#252C25] ring-offset-2 scale-110"
                               : s.backgroundGradient === c.value &&
                                   !s.backgroundImage
-                                ? "ring-2 ring-violet-600 ring-offset-2 scale-110"
+                                ? "ring-2 ring-[#252C25] ring-offset-2 scale-110"
                                 : "",
                           ].join(" ")}
                         />
@@ -1564,7 +1564,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                   {/* Recent colors */}
                   {recentColors.length > 0 && (
                     <div>
-                      <p className="text-[10px] font-bold text-violet-400 uppercase tracking-wider mb-2">
+                      <p className="text-[10px] font-bold text-[#5A635A] uppercase tracking-wider mb-2">
                         Recent
                       </p>
                       <div className="flex gap-2 flex-wrap">
@@ -1588,7 +1588,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                             className={[
                               "rounded-full transition-all duration-150 hover:scale-110 flex-shrink-0",
                               s.backgroundGradient === c && !s.backgroundImage
-                                ? "ring-2 ring-violet-600 ring-offset-2"
+                                ? "ring-2 ring-[#252C25] ring-offset-2"
                                 : "",
                             ].join(" ")}
                           />
@@ -1602,7 +1602,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                     className="flex items-center gap-3"
                     style={{ minHeight: 44 }}
                   >
-                    <label className="text-xs font-semibold text-violet-700 flex-shrink-0">
+                    <label className="text-xs font-semibold text-[#1C1F1C] flex-shrink-0">
                       Custom
                     </label>
                     <input
@@ -1610,7 +1610,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                       value={s.backgroundColor}
                       onChange={(e) => setBackground(e.target.value)}
                       aria-label="Custom background color"
-                      className="w-10 h-9 rounded-xl border border-violet-200 cursor-pointer bg-transparent flex-shrink-0"
+                      className="w-10 h-9 rounded-xl border border-[#D9D3CC] cursor-pointer bg-transparent flex-shrink-0"
                     />
                     <input
                       type="text"
@@ -1621,10 +1621,10 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                       aria-label="Hex color code"
                       spellCheck={false}
                       className={[
-                        "flex-1 min-w-0 rounded-xl border px-2.5 py-2 text-xs font-mono text-violet-900 bg-white/70 focus:outline-none focus:ring-2 transition",
+                        "flex-1 min-w-0 rounded-xl border px-2.5 py-2 text-xs font-mono text-[#1C1F1C] bg-[#ECE7E2]/90 focus:outline-none focus:ring-2 transition",
                         hexError
                           ? "border-red-400 focus:ring-red-300 bg-red-50"
-                          : "border-violet-200 focus:ring-violet-400",
+                          : "border-[#D9D3CC] focus:ring-[#252C25]",
                       ].join(" ")}
                     />
                   </div>
@@ -1664,7 +1664,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                     className="flex items-center justify-between"
                     style={{ minHeight: 44 }}
                   >
-                    <span className="text-xs font-semibold text-violet-700">
+                    <span className="text-xs font-semibold text-[#1C1F1C]">
                       Auto contrast
                     </span>
                     <button
@@ -1674,8 +1674,8 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                       aria-label="Auto contrast"
                       onClick={() => setAutoContrast((v) => !v)}
                       className={[
-                        "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500",
-                        autoContrast ? "bg-violet-600" : "bg-violet-200",
+                        "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25]",
+                        autoContrast ? "bg-[#252C25]" : "bg-[#D9D3CC]",
                       ].join(" ")}
                     >
                       <span
@@ -1704,7 +1704,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                     className="flex items-center justify-between"
                     style={{ minHeight: 44 }}
                   >
-                    <span className="text-xs font-semibold text-violet-700">
+                    <span className="text-xs font-semibold text-[#1C1F1C]">
                       Noise texture
                     </span>
                     <button
@@ -1714,8 +1714,8 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                       aria-label="Noise texture"
                       onClick={() => setNoiseEnabled((v) => !v)}
                       className={[
-                        "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500",
-                        noiseEnabled ? "bg-violet-600" : "bg-violet-200",
+                        "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25]",
+                        noiseEnabled ? "bg-[#252C25]" : "bg-[#D9D3CC]",
                       ].join(" ")}
                     >
                       <span
@@ -1764,7 +1764,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                   />
                   {/* Text position snap buttons */}
                   <div className="space-y-2">
-                    <p className="text-[10px] font-bold text-violet-400 uppercase tracking-wider">
+                    <p className="text-[10px] font-bold text-[#5A635A] uppercase tracking-wider">
                       Text position
                     </p>
                     <div className="grid grid-cols-5 gap-1.5">
@@ -1777,7 +1777,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                           aria-label={`Snap ${p}`}
                           onClick={() => snapTo(p)}
                           style={{ minHeight: 36 }}
-                          className="px-1 py-1.5 rounded-xl border border-white/60 bg-white/60 text-violet-600 text-[10px] font-bold uppercase hover:bg-violet-50 hover:border-violet-200 transition-all capitalize truncate"
+                          className="px-1 py-1.5 rounded-xl border border-[#D9D3CC] bg-[#F4F1ED] text-[#5A635A] text-[10px] font-bold uppercase hover:bg-[#ECE7E2] hover:border-[#D9D3CC] transition-all capitalize truncate"
                         >
                           {p}
                         </button>
@@ -1787,7 +1787,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                       <button
                         type="button"
                         onClick={() => setDragPos({ x: 0, y: 0 })}
-                        className="w-full text-[10px] text-violet-400 hover:text-violet-600 underline underline-offset-2 transition-colors text-center"
+                        className="w-full text-[10px] text-[#5A635A] hover:text-[#5A635A] underline underline-offset-2 transition-colors text-center"
                       >
                         Reset position
                       </button>
@@ -1801,7 +1801,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                       style={{ minHeight: 44 }}
                     >
                       <label
-                        className="text-xs font-semibold text-violet-700"
+                        className="text-xs font-semibold text-[#1C1F1C]"
                         htmlFor="qc-shadow-toggle"
                       >
                         Drop shadow
@@ -1815,10 +1815,10 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                           setShadow({ enabled: !shadowConfig.enabled })
                         }
                         className={[
-                          "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500",
+                          "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25]",
                           shadowConfig.enabled
-                            ? "bg-violet-600"
-                            : "bg-violet-200",
+                            ? "bg-[#252C25]"
+                            : "bg-[#D9D3CC]",
                         ].join(" ")}
                       >
                         <span
@@ -1830,9 +1830,9 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                           ].join(" ")}
                         >
                           {shadowConfig.enabled ? (
-                            <Sun className="w-2.5 h-2.5 text-violet-500" />
+                            <Sun className="w-2.5 h-2.5 text-[#5A635A]" />
                           ) : (
-                            <SunDim className="w-2.5 h-2.5 text-violet-300" />
+                            <SunDim className="w-2.5 h-2.5 text-[#D9D3CC]" />
                           )}
                         </span>
                       </button>
@@ -1881,10 +1881,10 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                     style={{ minHeight: 44 }}
                   >
                     <div>
-                      <span className="text-xs font-semibold text-violet-700 block">
+                      <span className="text-xs font-semibold text-[#1C1F1C] block">
                         FrameOS watermark
                       </span>
-                      <span className="text-[10px] text-violet-400">
+                      <span className="text-[10px] text-[#5A635A]">
                         Shown on exported image
                       </span>
                     </div>
@@ -1895,8 +1895,8 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                       aria-label="Show watermark"
                       onClick={() => setWatermarkEnabled((v) => !v)}
                       className={[
-                        "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500",
-                        watermarkEnabled ? "bg-violet-600" : "bg-violet-200",
+                        "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25]",
+                        watermarkEnabled ? "bg-[#252C25]" : "bg-[#D9D3CC]",
                       ].join(" ")}
                     >
                       <span
@@ -1951,7 +1951,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                         ] as [string, keyof SocialData, string][]
                       ).map(([lbl, key, ph]) => (
                         <div key={String(key)} className="space-y-1">
-                          <label className="text-xs font-semibold text-violet-700">
+                          <label className="text-xs font-semibold text-[#1C1F1C]">
                             {lbl}
                           </label>
                           <input
@@ -1962,13 +1962,13 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                             }
                             placeholder={ph}
                             aria-label={lbl}
-                            className="w-full rounded-2xl border border-violet-200 bg-white/70 px-3 py-2.5 text-sm text-violet-900 placeholder-violet-300 focus:outline-none focus:ring-2 focus:ring-violet-400 transition"
+                            className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] placeholder-[#5A635A]/50 focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
                           />
                         </div>
                       ))}
                     </div>
                     <div className="space-y-1">
-                      <label className="text-xs font-semibold text-violet-700">
+                      <label className="text-xs font-semibold text-[#1C1F1C]">
                         Caption
                       </label>
                       <textarea
@@ -1977,7 +1977,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                         onChange={(e) => setSocial({ caption: e.target.value })}
                         placeholder="Add a captionâ€¦"
                         aria-label="Caption"
-                        className="w-full rounded-2xl border border-violet-200 bg-white/70 px-3 py-2 text-sm text-violet-900 placeholder-violet-300 resize-none focus:outline-none focus:ring-2 focus:ring-violet-400 transition"
+                        className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2 text-sm text-[#1C1F1C] placeholder-[#5A635A]/50 resize-none focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
                       />
                     </div>
                     <div
@@ -1985,13 +1985,13 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                       style={{ minHeight: 44 }}
                     >
                       <div className="flex items-center gap-2 flex-wrap">
-                        <span className="text-xs font-semibold text-violet-700">
+                        <span className="text-xs font-semibold text-[#1C1F1C]">
                           Profile photo
                         </span>
                         <button
                           type="button"
                           onClick={() => profileImgRef.current?.click()}
-                          className="rounded-xl bg-violet-100 hover:bg-violet-200 border border-violet-200 px-3 py-2 text-xs font-semibold text-violet-700 transition"
+                          className="rounded-xl bg-[#F4F1ED] hover:bg-[#ECE7E2] border border-[#D9D3CC] px-3 py-2 text-xs font-semibold text-[#1C1F1C] transition"
                         >
                           {socialData.profileImageUrl ? "Change" : "Upload"}
                         </button>
@@ -2014,7 +2014,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                         />
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className="text-xs font-semibold text-violet-700">
+                        <span className="text-xs font-semibold text-[#1C1F1C]">
                           Dark mode
                         </span>
                         <button
@@ -2026,10 +2026,10 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                             setSocial({ darkMode: !socialData.darkMode })
                           }
                           className={[
-                            "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500",
+                            "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25]",
                             socialData.darkMode
-                              ? "bg-violet-600"
-                              : "bg-violet-200",
+                              ? "bg-[#252C25]"
+                              : "bg-[#D9D3CC]",
                           ].join(" ")}
                         >
                           <span
@@ -2054,8 +2054,8 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                   style={{ minHeight: 44 }}
                 >
                   <div className="flex items-center gap-2">
-                    <Layers className="w-3.5 h-3.5 text-violet-500 flex-shrink-0" />
-                    <p className="text-[11px] font-extrabold text-violet-400 uppercase tracking-widest">
+                    <Layers className="w-3.5 h-3.5 text-[#5A635A] flex-shrink-0" />
+                    <p className="text-[11px] font-extrabold text-[#5A635A] uppercase tracking-widest">
                       Scene Mode
                     </p>
                   </div>
@@ -2066,8 +2066,8 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                     aria-label="Enable scene background"
                     onClick={() => setSceneEnabled((v) => !v)}
                     className={[
-                      "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500",
-                      sceneEnabled ? "bg-violet-600" : "bg-violet-200",
+                      "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25]",
+                      sceneEnabled ? "bg-[#252C25]" : "bg-[#D9D3CC]",
                     ].join(" ")}
                   >
                     <span
@@ -2099,10 +2099,10 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                               onClick={() => setSceneType(sc.id)}
                               style={{ minHeight: 56 }}
                               className={[
-                                "flex flex-col items-center gap-1.5 rounded-2xl border px-1.5 py-2 text-[10px] font-bold transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500",
+                                "flex flex-col items-center gap-1.5 rounded-2xl border px-1.5 py-2 text-[10px] font-bold transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25]",
                                 active
-                                  ? "bg-violet-600 border-violet-600 text-white shadow-md shadow-violet-200"
-                                  : "bg-white/60 border-white/60 text-violet-600 hover:bg-violet-50 hover:border-violet-200",
+                                  ? "bg-[#252C25] border-[#252C25] text-white shadow-md shadow-[#D9D3CC]"
+                                  : "bg-[#F4F1ED] border-[#D9D3CC] text-[#5A635A] hover:bg-[#ECE7E2] hover:border-[#D9D3CC]",
                               ].join(" ")}
                             >
                               <SceneMiniPreview id={sc.id} active={active} />
@@ -2149,7 +2149,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                       handleExportQuality(e.target.value as ExportQuality)
                     }
                     aria-label="Export quality"
-                    className="w-full rounded-2xl border border-violet-200 bg-white/70 px-3 py-2.5 text-sm text-violet-900 focus:outline-none focus:ring-2 focus:ring-violet-400 transition"
+                    className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
                   >
                     {EXPORT_QUALITY_OPTIONS.map((opt) => (
                       <option
@@ -2185,7 +2185,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                       </a>
                     </p>
                   )}
-                  <p className="text-[10px] text-violet-400 leading-relaxed">
+                  <p className="text-[10px] text-[#5A635A] leading-relaxed">
                     Higher quality increases file size. For social media,{" "}
                     <span className="font-semibold">
                       1080&thinsp;&times;&thinsp;1080
@@ -2216,10 +2216,10 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                           onClick={() => set({ aspectRatio: r })}
                           style={{ minHeight: 44 }}
                           className={[
-                            "flex flex-col items-center gap-1.5 px-3 py-2 rounded-2xl border text-[11px] font-semibold transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-violet-500",
+                            "flex flex-col items-center gap-1.5 px-3 py-2 rounded-2xl border text-[11px] font-semibold transition-all duration-150 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25]",
                             active
-                              ? "bg-violet-600 border-violet-600 text-white shadow-md shadow-violet-200"
-                              : "bg-white/60 border-white/60 text-violet-600 hover:bg-violet-50 hover:border-violet-200",
+                              ? "bg-[#252C25] border-[#252C25] text-white shadow-md shadow-[#D9D3CC]"
+                              : "bg-[#F4F1ED] border-[#D9D3CC] text-[#5A635A] hover:bg-[#ECE7E2] hover:border-[#D9D3CC]",
                           ].join(" ")}
                         >
                           <span
@@ -2227,8 +2227,8 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                             className={[
                               "block rounded border-2 transition-colors",
                               active
-                                ? "border-white/70 bg-white/20"
-                                : "border-violet-400 bg-violet-100",
+                                ? "border-[#D9D3CC] bg-white/20"
+                                : "border-[#5A635A] bg-[#F4F1ED]",
                             ].join(" ")}
                           />
                           {r}
@@ -2244,9 +2244,9 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
             {/* â”€â”€ Sticky mobile export button â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */}
             {onExport && (
               <div
-                className="lg:hidden sticky bottom-0 p-4 border-t border-violet-100/60"
+                className="lg:hidden sticky bottom-0 p-4 border-t border-[#D9D3CC]/60"
                 style={{
-                  background: "rgba(255,255,255,0.85)",
+                  background: "rgba(244,241,237,0.95)",
                   backdropFilter: "blur(16px)",
                   WebkitBackdropFilter: "blur(16px)",
                   paddingBottom: "max(1rem, env(safe-area-inset-bottom))",
@@ -2256,7 +2256,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                   type="button"
                   onClick={onExport}
                   disabled={isExporting}
-                  className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl text-sm font-semibold text-white bg-gradient-to-r from-violet-600 to-purple-500 shadow-lg shadow-violet-200 hover:from-violet-700 hover:to-purple-600 disabled:opacity-60 transition-all duration-150"
+                  className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl text-sm font-semibold text-white bg-[#252C25] shadow-lg shadow-[#D9D3CC] hover:bg-[#1F261F] disabled:opacity-60 transition-all duration-150"
                 >
                   <Download className="w-4 h-4" />
                   {isExporting ? "Exportingâ€¦" : "Download PNG"}

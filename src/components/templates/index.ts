@@ -3,6 +3,12 @@ import MinimalGlassTemplate from "./MinimalGlassTemplate";
 import BrowserWindowTemplate from "./BrowserWindowTemplate";
 import PolaroidTemplate from "./PolaroidTemplate";
 import CleanCardTemplate from "./CleanCardTemplate";
+import CrumpledPaperTemplate from "./CrumpledPaperTemplate";
+import TornNotebookTemplate from "./TornNotebookTemplate";
+import GalleryFrameTemplate from "./GalleryFrameTemplate";
+import TypewriterTemplate from "./TypewriterTemplate";
+import NewspaperTemplate from "./NewspaperTemplate";
+import ShadowDeskTemplate from "./ShadowDeskTemplate";
 
 import TwitterPostTemplate from "./social/TwitterPostTemplate";
 import LinkedInPostTemplate from "./social/LinkedInPostTemplate";
@@ -26,6 +32,12 @@ export {
   BrowserWindowTemplate,
   PolaroidTemplate,
   CleanCardTemplate,
+  CrumpledPaperTemplate,
+  TornNotebookTemplate,
+  GalleryFrameTemplate,
+  TypewriterTemplate,
+  NewspaperTemplate,
+  ShadowDeskTemplate,
   TwitterPostTemplate,
   LinkedInPostTemplate,
   InstagramPostTemplate,
@@ -78,6 +90,54 @@ export const TEMPLATES: TemplateDefinition[] = [
     description: "Minimal white card with accent strip",
     previewIcon: "🃏",
     component: CleanCardTemplate,
+    category: "frames",
+  },
+  {
+    id: "crumpled-paper",
+    name: "Crumpled Paper",
+    description: "Tactile paper canvas with crease lines and grain",
+    previewIcon: "📄",
+    component: CrumpledPaperTemplate,
+    category: "frames",
+  },
+  {
+    id: "torn-notebook",
+    name: "Torn Notebook",
+    description: "Ruled notepad page with torn edges and spiral binding",
+    previewIcon: "📓",
+    component: TornNotebookTemplate,
+    category: "frames",
+  },
+  {
+    id: "gallery-frame",
+    name: "Gallery Frame",
+    description: "Ornate gold picture frame with linen mat board",
+    previewIcon: "🖼",
+    component: GalleryFrameTemplate,
+    category: "frames",
+  },
+  {
+    id: "typewriter",
+    name: "Typewriter",
+    description: "Aged typewriter paper with ruled header and mono aesthetic",
+    previewIcon: "⌨",
+    component: TypewriterTemplate,
+    category: "frames",
+  },
+  {
+    id: "newspaper",
+    name: "Newspaper",
+    description: "Editorial newsprint layout with serif masthead",
+    previewIcon: "📰",
+    component: NewspaperTemplate,
+    category: "frames",
+  },
+  {
+    id: "shadow-desk",
+    name: "Shadow Desk",
+    description: "Paper card on a textured desk surface with depth",
+    previewIcon: "🗂",
+    component: ShadowDeskTemplate,
     category: "frames",
   },
 
