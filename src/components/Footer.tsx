@@ -1,8 +1,8 @@
 const footerLinks = {
-  Product:   ["Features", "Templates", "Changelog", "Roadmap", "Status"],
-  Company:   ["About", "Blog", "Careers", "Press", "Contact"],
+  Product: ["Features", "Templates", "Changelog", "Roadmap", "Status"],
+  Company: ["About", "Blog", "Careers", "Press", "Contact"],
   Resources: ["Docs", "API Reference", "Community", "Tutorials", "Showcase"],
-  Legal:     ["Privacy Policy", "Terms of Service", "Cookie Policy", "GDPR"],
+  Legal: ["Privacy Policy", "Terms of Service", "Cookie Policy", "GDPR"],
 };
 
 const socials = [
@@ -37,7 +37,10 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="relative border-t border-[#D9D3CC]" style={{ background: "#F4F1ED" }}>
+    <footer
+      className="relative border-t border-[#D9D3CC]"
+      style={{ background: "#F4F1ED" }}
+    >
       <div className="max-w-7xl mx-auto px-6 py-16">
         {/* Top */}
         <div className="grid grid-cols-2 md:grid-cols-6 gap-10 mb-14">
@@ -46,13 +49,46 @@ export default function Footer() {
             <a href="#" className="flex items-center gap-2.5 mb-4">
               <span className="w-8 h-8 rounded-xl bg-[#252C25] flex items-center justify-center shadow-sm">
                 <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                  <rect x="2" y="2" width="6" height="6" rx="1.5" fill="white" />
-                  <rect x="10" y="2" width="6" height="6" rx="1.5" fill="white" fillOpacity="0.7" />
-                  <rect x="2" y="10" width="6" height="6" rx="1.5" fill="white" fillOpacity="0.7" />
-                  <rect x="10" y="10" width="6" height="6" rx="1.5" fill="white" fillOpacity="0.5" />
+                  <rect
+                    x="2"
+                    y="2"
+                    width="6"
+                    height="6"
+                    rx="1.5"
+                    fill="white"
+                  />
+                  <rect
+                    x="10"
+                    y="2"
+                    width="6"
+                    height="6"
+                    rx="1.5"
+                    fill="white"
+                    fillOpacity="0.7"
+                  />
+                  <rect
+                    x="2"
+                    y="10"
+                    width="6"
+                    height="6"
+                    rx="1.5"
+                    fill="white"
+                    fillOpacity="0.7"
+                  />
+                  <rect
+                    x="10"
+                    y="10"
+                    width="6"
+                    height="6"
+                    rx="1.5"
+                    fill="white"
+                    fillOpacity="0.5"
+                  />
                 </svg>
               </span>
-              <span className="font-bold text-xl text-[#1C1F1C] tracking-tight">FrameOS</span>
+              <span className="font-bold text-xl text-[#1C1F1C] tracking-tight">
+                FrameOS
+              </span>
             </a>
             <p className="text-sm text-[#5A635A] leading-relaxed max-w-xs">
               A premium design studio built for creators, indie hackers, and
@@ -60,9 +96,23 @@ export default function Footer() {
             </p>
             <p className="text-xs text-[#5A635A] mt-3">
               Built by{" "}
-              <a href="https://www.linkedin.com/in/kartik-singh-879b6b288/" target="_blank" rel="noopener noreferrer" className="text-[#252C25] font-semibold hover:underline">Kartik Singh</a>
-              {" "}&middot;{" "}
-              <a href="https://x.com/kartik_singhhh" target="_blank" rel="noopener noreferrer" className="text-[#252C25] font-semibold hover:underline">@kartik_singhhh</a>
+              <a
+                href="https://www.linkedin.com/in/kartik-singh-879b6b288/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#252C25] font-semibold hover:underline"
+              >
+                Kartik Singh
+              </a>{" "}
+              &middot;{" "}
+              <a
+                href="https://x.com/kartik_singhhh"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-[#252C25] font-semibold hover:underline"
+              >
+                @kartik_singhhh
+              </a>
             </p>
             <div className="flex items-center gap-2.5 mt-5">
               {socials.map((social) => (
@@ -81,11 +131,16 @@ export default function Footer() {
           {/* Link columns */}
           {Object.entries(footerLinks).map(([heading, links]) => (
             <div key={heading}>
-              <p className="text-xs font-bold text-[#1C1F1C] uppercase tracking-widest mb-4">{heading}</p>
+              <p className="text-xs font-bold text-[#1C1F1C] uppercase tracking-widest mb-4">
+                {heading}
+              </p>
               <ul className="space-y-2.5">
                 {links.map((link) => (
                   <li key={link}>
-                    <a href="#" className="text-sm text-[#5A635A] hover:text-[#1C1F1C] font-medium transition-colors">
+                    <a
+                      href="#"
+                      className="text-sm text-[#5A635A] hover:text-[#1C1F1C] font-medium transition-colors"
+                    >
                       {link}
                     </a>
                   </li>
@@ -99,18 +154,47 @@ export default function Footer() {
         <div className="border-t border-[#D9D3CC] pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-sm text-[#5A635A] font-medium">
             &copy; {new Date().getFullYear()} FrameOS by{" "}
-            <a href="https://www.linkedin.com/in/kartik-singh-879b6b288/" target="_blank" rel="noopener noreferrer" className="hover:text-[#1C1F1C] transition-colors">
+            <a
+              href="https://www.linkedin.com/in/kartik-singh-879b6b288/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#1C1F1C] transition-colors"
+            >
               Kartik Singh
             </a>
             . All rights reserved.
           </p>
           <div className="flex items-center gap-2">
             <span className="w-2 h-2 rounded-full bg-green-500 animate-pulse-slow" />
-            <span className="text-xs text-[#5A635A] font-medium">All systems operational</span>
+            <span className="text-xs text-[#5A635A] font-medium">
+              All systems operational
+            </span>
           </div>
-          <div className="flex items-center gap-4">
-            <a href="#" className="text-sm text-[#5A635A] hover:text-[#1C1F1C] transition font-medium">Privacy</a>
-            <a href="/terms" className="text-sm text-[#5A635A] hover:text-[#1C1F1C] transition font-medium">Terms</a>
+          <div className="flex items-center gap-4 flex-wrap justify-center">
+            <a
+              href="/privacy-policy"
+              className="text-sm text-[#5A635A] hover:text-[#1C1F1C] transition font-medium"
+            >
+              Privacy Policy
+            </a>
+            <a
+              href="/terms"
+              className="text-sm text-[#5A635A] hover:text-[#1C1F1C] transition font-medium"
+            >
+              Terms
+            </a>
+            <a
+              href="/refund-policy"
+              className="text-sm text-[#5A635A] hover:text-[#1C1F1C] transition font-medium"
+            >
+              Refund Policy
+            </a>
+            <a
+              href="/pricing"
+              className="text-sm text-[#5A635A] hover:text-[#1C1F1C] transition font-medium"
+            >
+              Pricing
+            </a>
           </div>
         </div>
       </div>
