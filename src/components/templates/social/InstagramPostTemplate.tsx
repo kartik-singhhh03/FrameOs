@@ -8,6 +8,7 @@ import { ProfileAvatar, IconHeart, IconComment, IconShare } from "./_shared";
 export default function InstagramPostTemplate({
   children,
   socialData,
+  canvasWidth,
 }: TemplateProps) {
   const dark = socialData?.darkMode ?? false;
 
@@ -28,7 +29,7 @@ export default function InstagramPostTemplate({
     <div
       style={{
         background: bg,
-        width: 420,
+        width: canvasWidth ?? 420,
         fontFamily: '"Inter","Helvetica Neue",Arial,sans-serif',
         boxSizing: "border-box",
         border: `1px solid ${border}`,

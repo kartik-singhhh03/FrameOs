@@ -7,6 +7,7 @@ import type { TemplateProps } from "../types";
 export default function CodeSnippetTemplate({
   children,
   socialData,
+  canvasWidth,
 }: TemplateProps) {
   const filename = socialData?.filename ?? "quote.md";
   const language = filename.split(".").pop() ?? "md";
@@ -35,7 +36,7 @@ export default function CodeSnippetTemplate({
         background: "#1e1e2e",
         borderRadius: 14,
         overflow: "hidden",
-        width: 540,
+        width: canvasWidth ?? 540,
         fontFamily: '"JetBrains Mono","Fira Code","Cascadia Code",monospace',
         fontSize: 13,
         lineHeight: "1.7",

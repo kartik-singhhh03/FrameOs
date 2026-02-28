@@ -14,6 +14,7 @@ import {
 export default function LinkedInPostTemplate({
   children,
   socialData,
+  canvasWidth,
 }: TemplateProps) {
   const dark = socialData?.darkMode ?? false;
 
@@ -38,7 +39,7 @@ export default function LinkedInPostTemplate({
         background: bg,
         borderRadius: 8,
         border: `1px solid ${border}`,
-        width: 500,
+        width: canvasWidth ?? 500,
         fontFamily: '"Inter","Helvetica Neue",Arial,sans-serif',
         overflow: "hidden",
         boxSizing: "border-box",

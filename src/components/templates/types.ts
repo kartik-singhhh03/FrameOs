@@ -41,6 +41,8 @@ export interface TemplateProps {
   children: ReactNode;
   /** Passed to social templates; frame templates ignore it */
   socialData?: SocialData;
+  /** Canvas pixel width — social templates use this so their container matches the canvas exactly */
+  canvasWidth?: number;
 }
 
 // ─── Template Registry ─────────────────────────────────────────────────────────

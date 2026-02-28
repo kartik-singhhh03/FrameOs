@@ -14,6 +14,7 @@ import {
 export default function ThreadsPostTemplate({
   children,
   socialData,
+  canvasWidth,
 }: TemplateProps) {
   const dark = socialData?.darkMode ?? false;
 
@@ -36,7 +37,7 @@ export default function ThreadsPostTemplate({
         borderRadius: 16,
         border: `1px solid ${border}`,
         padding: "16px 16px 12px",
-        width: 480,
+        width: canvasWidth != null ? canvasWidth + 82 : 480,
         fontFamily: '"Inter","Helvetica Neue",Arial,sans-serif',
         boxSizing: "border-box",
         overflow: "hidden",

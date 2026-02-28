@@ -7,6 +7,7 @@ import type { TemplateProps } from "../types";
 export default function NotionPageTemplate({
   children,
   socialData,
+  canvasWidth,
 }: TemplateProps) {
   const title = socialData?.displayName ?? "Untitled";
   const handle = socialData?.handle ?? "@frameos";
@@ -19,7 +20,7 @@ export default function NotionPageTemplate({
         borderRadius: 12,
         border: "1px solid #e5e5e5",
         overflow: "hidden",
-        width: 520,
+        width: canvasWidth ?? 520,
         fontFamily: '"Inter","Helvetica Neue",Arial,sans-serif',
         boxSizing: "border-box",
         boxShadow: "0 2px 16px 0 rgba(0,0,0,0.08)",
