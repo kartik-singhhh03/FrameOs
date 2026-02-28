@@ -1,5 +1,6 @@
 import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
+import ProductHuntBadge from "@/components/ProductHuntBadge";
 import Features from "@/components/Features";
 import ForCreators from "@/components/ForCreators";
 import Testimonials from "@/components/Testimonials";
@@ -12,6 +13,7 @@ export default function Home() {
     <main className="min-h-screen overflow-x-hidden">
       <Navbar />
       <Hero />
+      <ProductHuntBadge />
       <Features />
       <ForCreators />
       <Testimonials />
