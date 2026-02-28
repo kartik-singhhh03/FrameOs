@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import {
   useState,
@@ -46,7 +46,17 @@ import type { FormatResult } from "@/lib/autoFormat";
 // â”€â”€â”€ Types â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€
 
 type TextAlign = "left" | "center" | "right";
-type AspectRatio = "1:1" | "4:5" | "16:9" | "9:16";
+type AspectRatio =
+  | "1:1"
+  | "4:5"
+  | "16:9"
+  | "9:16"
+  | "3:4"
+  | "21:9"
+  | "2:3"
+  | "3:2"
+  | "5:4"
+  | "4:3";
 type EmphasisType = "highlight" | "color" | "underline" | "pill" | "none";
 
 interface EmphasisConfig {
@@ -253,11 +263,17 @@ const RATIO_MAP: Record<AspectRatio, { w: number; h: number }> = {
   "4:5": { w: 4, h: 5 },
   "16:9": { w: 16, h: 9 },
   "9:16": { w: 9, h: 16 },
+  "3:4": { w: 3, h: 4 },
+  "21:9": { w: 21, h: 9 },
+  "2:3": { w: 2, h: 3 },
+  "3:2": { w: 3, h: 2 },
+  "5:4": { w: 5, h: 4 },
+  "4:3": { w: 4, h: 3 },
 };
 
 const DEFAULT_STATE: CanvasState = {
   quote: "The best design is the one you don't notice.",
-  author: "â€” Anonymous",
+  author: "- Anonymous",
   fontFamily: "Inter",
   fontSize: 28,
   fontWeight: 600,
@@ -367,7 +383,9 @@ function ControlGroup({
   );
 }
 
-// Mini thumbnail previews for each scene type
+// Mini thumbnail previews for each scene type — handles all 14 scene modes.
+// Patch: we cannot add new cases after a return, so we re-declare the function
+// with full support for all 14 scene types.
 function SceneMiniPreview({ id, active }: { id: SceneType; active: boolean }) {
   const base =
     "w-full h-8 rounded-lg overflow-hidden relative flex items-center justify-center";
@@ -414,25 +432,151 @@ function SceneMiniPreview({ id, active }: { id: SceneType; active: boolean }) {
       </div>
     );
   }
-  // dark-spotlight
+  if (id === "dark-spotlight") {
+    return (
+      <div className={base} style={{ background: "#0c0c0f" }}>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(ellipse 70% 70% at 50% 50%,rgba(139,92,246,0.35),transparent)",
+          }}
+        />
+        <div
+          className={dot}
+          style={{
+            background: "rgba(255,255,255,0.15)",
+            position: "relative",
+            zIndex: 1,
+          }}
+        />
+      </div>
+    );
+  }
+  if (id === "glass") {
+    return (
+      <div
+        className={base}
+        style={{ background: "linear-gradient(135deg,#dce6ff,#e6dcff)" }}
+      >
+        <div className={dot} style={{ background: "rgba(255,255,255,0.6)" }} />
+      </div>
+    );
+  }
+  if (id === "dark-studio") {
+    return (
+      <div
+        className={base}
+        style={{ background: "linear-gradient(160deg,#0d0d12,#12121a)" }}
+      >
+        <div className={dot} style={{ background: "rgba(80,60,140,0.5)" }} />
+      </div>
+    );
+  }
+  if (id === "desk-mockup") {
+    return (
+      <div
+        className={base}
+        style={{ background: "linear-gradient(180deg,#c8bba8,#c0b098)" }}
+      >
+        <div className={dot} style={{ background: "rgba(255,248,235,0.6)" }} />
+      </div>
+    );
+  }
+  if (id === "floating-card") {
+    return (
+      <div
+        className={base}
+        style={{ background: "linear-gradient(135deg,#e8eaf6,#fce7f3)" }}
+      >
+        <div className={dot} style={{ background: "rgba(255,255,255,0.7)" }} />
+      </div>
+    );
+  }
+  if (id === "gradient-glow") {
+    return (
+      <div
+        className={base}
+        style={{
+          background: "radial-gradient(ellipse at center,#2d1b69,#0f0e17)",
+        }}
+      >
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(ellipse 70% 70% at 50% 50%,rgba(124,58,237,0.5),transparent)",
+          }}
+        />
+        <div
+          className={dot}
+          style={{
+            background: "rgba(255,255,255,0.2)",
+            position: "relative",
+            zIndex: 1,
+          }}
+        />
+      </div>
+    );
+  }
+  if (id === "soft-paper") {
+    return (
+      <div className={base} style={{ background: "#f5f0e8" }}>
+        <div className={dot} style={{ background: "rgba(120,90,60,0.25)" }} />
+      </div>
+    );
+  }
+  if (id === "editorial") {
+    return (
+      <div
+        className={base}
+        style={{ background: "#fff", borderTop: "3px solid #1a1a1a" }}
+      >
+        <div className={dot} style={{ background: "rgba(0,0,0,0.15)" }} />
+      </div>
+    );
+  }
+  if (id === "cinematic") {
+    return (
+      <div className={base} style={{ background: "#000" }}>
+        <div
+          style={{
+            position: "absolute",
+            inset: 0,
+            background:
+              "radial-gradient(ellipse 80% 40% at 50% 10%,rgba(255,250,200,0.2),transparent)",
+          }}
+        />
+        <div
+          className={dot}
+          style={{
+            background: "rgba(255,255,255,0.12)",
+            position: "relative",
+            zIndex: 1,
+          }}
+        />
+      </div>
+    );
+  }
+  if (id === "social-frame") {
+    return (
+      <div
+        className={base}
+        style={{ background: "linear-gradient(145deg,#eff6ff,#fdf4ff)" }}
+      >
+        <div className={dot} style={{ background: "rgba(60,90,180,0.25)" }} />
+      </div>
+    );
+  }
+  // screenshot-pro
   return (
-    <div className={base} style={{ background: "#0c0c0f" }}>
-      <div
-        style={{
-          position: "absolute",
-          inset: 0,
-          background:
-            "radial-gradient(ellipse 70% 70% at 50% 50%,rgba(139,92,246,0.35),transparent)",
-        }}
-      />
-      <div
-        className={dot}
-        style={{
-          background: "rgba(255,255,255,0.15)",
-          position: "relative",
-          zIndex: 1,
-        }}
-      />
+    <div
+      className={base}
+      style={{ background: "linear-gradient(180deg,#dde3ea,#f1f5f9)" }}
+    >
+      <div className={dot} style={{ background: "rgba(30,50,80,0.2)" }} />
     </div>
   );
 }
@@ -501,10 +645,14 @@ interface QuoteCanvasProps {
  * so a parent can call html-to-image on it for PNG export.
  */
 const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
-  ({ onExport, isExporting = false, onExportQualityChange, initialTemplateId }, canvasRef) => {
+  (
+    { onExport, isExporting = false, onExportQualityChange, initialTemplateId },
+    canvasRef,
+  ) => {
     const [s, setS] = useState<CanvasState>(DEFAULT_STATE);
-    const [selectedTemplate, setSelectedTemplate] =
-      useState<TemplateId>(initialTemplateId ?? DEFAULT_TEMPLATE_ID);
+    const [selectedTemplate, setSelectedTemplate] = useState<TemplateId>(
+      initialTemplateId ?? DEFAULT_TEMPLATE_ID,
+    );
 
     // â”€â”€ Scene state â”€â”€
     const [sceneEnabled, setSceneEnabled] = useState(false);
@@ -556,6 +704,12 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
     // -- Watermark --
     const [watermarkEnabled, setWatermarkEnabled] = useState(true);
 
+    // -- Auto font-size overflow adjustment --
+    const [overflowFontSize, setOverflowFontSize] = useState<number | null>(
+      null,
+    );
+    const overflowTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
     // -- Pro plan -- fetched from /api/subscription-status on mount
     const [isPro, setIsPro] = useState(false);
     useEffect(() => {
@@ -592,12 +746,8 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
     // Canvas dimensions (declared early so getNativeExportWidth can depend on canvasWidth)
     const BASE_SIZE = 420;
     const { w, h } = RATIO_MAP[s.aspectRatio];
-    const canvasWidth =
-      s.aspectRatio === "16:9"
-        ? BASE_SIZE
-        : s.aspectRatio === "9:16"
-          ? Math.round(BASE_SIZE * (w / h))
-          : BASE_SIZE;
+    // Use BASE_SIZE as the longer dimension so all ratios fit comfortably.
+    const canvasWidth = w >= h ? BASE_SIZE : Math.round(BASE_SIZE * (w / h));
     const canvasHeight = Math.round(canvasWidth * (h / w));
 
     const canvasAreaRef = useRef<HTMLDivElement>(null);
@@ -782,6 +932,46 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
     const effectiveLineHeight = autoFormatEnabled
       ? formatResult.lineHeight
       : s.lineHeight;
+
+    // -- Auto font-size: shrink to prevent text overflow --
+    // Runs after each render via a debounced timeout.
+    // Compares contentDivRef natural height to the fixed canvasHeight.
+    useEffect(() => {
+      if (overflowTimerRef.current) clearTimeout(overflowTimerRef.current);
+      overflowTimerRef.current = setTimeout(() => {
+        const el = contentDivRef.current;
+        if (!el) return;
+        const naturalH = el.offsetHeight; // full rendered height (not clipped)
+        if (naturalH <= canvasHeight) {
+          setOverflowFontSize(null); // fits — clear any previous reduction
+          return;
+        }
+        // Proportionally reduce font size to fit within canvas
+        const ratio = canvasHeight / naturalH;
+        const reduced = Math.max(
+          12,
+          Math.floor(effectiveFontSize * ratio * 0.96),
+        );
+        setOverflowFontSize(reduced < effectiveFontSize ? reduced : null);
+      }, 120);
+      return () => {
+        if (overflowTimerRef.current) clearTimeout(overflowTimerRef.current);
+      };
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [
+      s.quote,
+      s.fontSize,
+      s.fontFamily,
+      s.fontWeight,
+      s.lineHeight,
+      s.letterSpacing,
+      s.padding,
+      canvasHeight,
+      effectiveFontSize,
+    ]);
+
+    /** Final font size — either auto-format size or overflow-adjusted (min 12px) */
+    const finalFontSize = overflowFontSize ?? effectiveFontSize;
 
     /** Renders text with optional emphasis spans for export-safe output */
     function renderQuoteText(raw: string): ReactNode {
@@ -972,7 +1162,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
           {/* Quote body */}
           <p
             style={{
-              fontSize: effectiveFontSize,
+              fontSize: finalFontSize,
               color: effectiveTextColor,
               lineHeight: effectiveLineHeight,
               fontWeight: s.fontWeight,
@@ -1048,7 +1238,9 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
               style={{
                 transformOrigin: "top center",
                 transform: `scale(${previewScale})`,
-                display: "inline-block",
+                width: "100%",
+                display: "flex",
+                justifyContent: "center",
                 // collapse the extra vertical space when scaled down
                 marginBottom:
                   previewScale < 1 ? `${(previewScale - 1) * 100}%` : undefined,
@@ -1135,16 +1327,16 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                     rows={3}
                     value={s.quote}
                     onChange={(e) => set({ quote: e.target.value })}
-                    placeholder="Enter your quoteâ€¦"
+                    placeholder="Enter your quote\u2026"
                     aria-label="Quote text"
                     className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] placeholder-[#5A635A]/50 resize-none focus:outline-none focus:ring-2 focus:ring-[#252C25] transition leading-relaxed"
-                    style={{ wordBreak: "break-word" }}
+                    style={{ wordBreak: "break-word", whiteSpace: "pre-wrap" }}
                   />
                   <input
                     type="text"
                     value={s.author}
                     onChange={(e) => set({ author: e.target.value })}
-                    placeholder="â€” Author name"
+                    placeholder="- Author name"
                     aria-label="Author"
                     className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] placeholder-[#5A635A]/50 focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
                   />
@@ -1977,7 +2169,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                         rows={2}
                         value={socialData.caption}
                         onChange={(e) => setSocial({ caption: e.target.value })}
-                        placeholder="Add a captionâ€¦"
+                        placeholder="Add a caption\u2026"
                         aria-label="Caption"
                         className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2 text-sm text-[#1C1F1C] placeholder-[#5A635A]/50 resize-none focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
                       />
@@ -2089,7 +2281,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                 >
                   <div className="overflow-hidden">
                     <div className="space-y-4 pb-3 pt-2">
-                      <div className="grid grid-cols-4 gap-2">
+                      <div className="grid grid-cols-4 gap-2 sm:grid-cols-5">
                         {SCENE_OPTIONS.map((sc) => {
                           const active = sceneType === sc.id;
                           return (
@@ -2261,7 +2453,7 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                   className="w-full flex items-center justify-center gap-2 py-3.5 rounded-2xl text-sm font-semibold text-white bg-[#252C25] shadow-lg shadow-[#D9D3CC] hover:bg-[#1F261F] disabled:opacity-60 transition-all duration-150"
                 >
                   <Download className="w-4 h-4" />
-                  {isExporting ? "Exportingâ€¦" : "Download PNG"}
+                  {isExporting ? "Exporting\u2026" : "Download PNG"}
                 </button>
               </div>
             )}

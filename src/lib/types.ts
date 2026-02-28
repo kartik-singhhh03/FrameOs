@@ -1,4 +1,14 @@
-export type AspectRatio = "1:1" | "4:5" | "16:9" | "9:16";
+export type AspectRatio =
+  | "1:1"
+  | "4:5"
+  | "16:9"
+  | "9:16"
+  | "3:4"
+  | "21:9"
+  | "2:3"
+  | "3:2"
+  | "5:4"
+  | "4:3";
 export type TextAlign = "left" | "center" | "right";
 
 export interface QuoteConfig {
@@ -99,4 +109,10 @@ export const RATIO_OPTIONS: {
   { label: "4:5", value: "4:5", w: 4, h: 5 },
   { label: "16:9", value: "16:9", w: 16, h: 9 },
   { label: "9:16", value: "9:16", w: 9, h: 16 },
+  { label: "3:4", value: "3:4", w: 3, h: 4 },
+  { label: "21:9", value: "21:9", w: 21, h: 9 },
+  { label: "2:3", value: "2:3", w: 2, h: 3 },
+  { label: "3:2", value: "3:2", w: 3, h: 2 },
+  { label: "5:4", value: "5:4", w: 5, h: 4 },
+  { label: "4:3", value: "4:3", w: 4, h: 3 },
 ];
