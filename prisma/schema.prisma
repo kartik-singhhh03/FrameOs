@@ -9,12 +9,21 @@ datasource db {
     provider = "postgresql"
 }
 
+// ─── Role enum ────────────────────────────────────────────────────────────────
+// Stored in the database. Never exposed to the frontend.
+// Default is USER; set to ADMIN via direct DB query (see README / migration notes).
+enum Role {
+    USER
+    ADMIN
+}
+
 model User {
     id               String         @id @default(cuid())
     name             String?
     email            String         @unique
     emailVerified    DateTime?
     image            String?
+    role             Role           @default(USER)
     paddleCustomerId String?
     createdAt        DateTime       @default(now())
     updatedAt        DateTime       @updatedAt

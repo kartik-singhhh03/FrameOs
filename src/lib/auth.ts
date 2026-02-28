@@ -1,3 +1,12 @@
+/**
+ * NextAuth configuration.
+ *
+ * SECURITY — Role is intentionally excluded from the JWT and client session.
+ * Role-based access is enforced exclusively in server-side API routes by
+ * reading `user.role` directly from the database via Prisma.
+ * The frontend never sees the role; it only receives { isPro: boolean } from
+ * /api/subscription-status.
+ */
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import type { NextAuthOptions } from "next-auth";
@@ -23,14 +32,14 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      // Persist the user's DB id into the JWT on first sign-in
+      // Only the DB user id goes into the JWT — role is deliberately omitted.
       if (user) {
         token.id = user.id;
       }
       return token;
     },
     async session({ session, token }) {
-      // Expose user.id to the client session
+      // Only id is surfaced to the client — role is deliberately omitted.
       if (session.user && token.id) {
         session.user.id = token.id as string;
       }
