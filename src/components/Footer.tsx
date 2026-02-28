@@ -1,8 +1,14 @@
-const footerLinks = {
-  Product: ["Features", "Templates", "Changelog", "Roadmap", "Status"],
-  Company: ["About", "Blog", "Careers", "Press", "Contact"],
-  Resources: ["Docs", "API Reference", "Community", "Tutorials", "Showcase"],
-  Legal: ["Privacy Policy", "Terms of Service", "Cookie Policy", "GDPR"],
+const footerLinks: Record<string, { label: string; href: string }[]> = {
+  Product: [
+    { label: "Editor", href: "/editor" },
+    { label: "Templates", href: "/templates" },
+    { label: "Pricing", href: "/pricing" },
+  ],
+  Legal: [
+    { label: "Terms & Conditions", href: "/terms" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Refund Policy", href: "/refund-policy" },
+  ],
 };
 
 const socials = [
@@ -114,6 +120,15 @@ export default function Footer() {
                 @kartik_singhhh
               </a>
             </p>
+            <p className="text-xs text-[#5A635A] mt-2">
+              Contact:{" "}
+              <a
+                href="mailto:sweatandcode@gmail.com"
+                className="text-[#252C25] font-semibold hover:underline"
+              >
+                sweatandcode@gmail.com
+              </a>
+            </p>
             <div className="flex items-center gap-2.5 mt-5">
               {socials.map((social) => (
                 <a
@@ -136,12 +151,12 @@ export default function Footer() {
               </p>
               <ul className="space-y-2.5">
                 {links.map((link) => (
-                  <li key={link}>
+                  <li key={link.label}>
                     <a
-                      href="#"
+                      href={link.href}
                       className="text-sm text-[#5A635A] hover:text-[#1C1F1C] font-medium transition-colors"
                     >
-                      {link}
+                      {link.label}
                     </a>
                   </li>
                 ))}
@@ -194,6 +209,12 @@ export default function Footer() {
               className="text-sm text-[#5A635A] hover:text-[#1C1F1C] transition font-medium"
             >
               Pricing
+            </a>
+            <a
+              href="mailto:sweatandcode@gmail.com"
+              className="text-sm text-[#5A635A] hover:text-[#1C1F1C] transition font-medium"
+            >
+              Contact
             </a>
           </div>
         </div>
