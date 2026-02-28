@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useSession, signIn } from "next-auth/react";
+import { trackEvent } from "@/lib/analytics";
 
 interface PaddleCheckoutButtonProps {
   className?: string;
@@ -52,6 +53,10 @@ export default function PaddleCheckoutButton({
       }
 
       win.Paddle.Checkout.open({ transactionId: data.transactionId });
+      trackEvent("upgrade_clicked", {
+        location: "upgrade_page",
+        plan: "pro_monthly",
+      });
     } catch (err) {
       setError(err instanceof Error ? err.message : "Something went wrong.");
     } finally {

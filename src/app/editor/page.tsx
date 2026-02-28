@@ -7,6 +7,7 @@ import { ArrowLeft, Download } from "lucide-react";
 import QuoteCanvas from "@/components/QuoteCanvas";
 import { downloadAsPng } from "@/lib/download";
 import type { TemplateId } from "@/components/templates";
+import { trackEvent } from "@/lib/analytics";
 
 export default function EditorPage() {
   return (
@@ -42,6 +43,10 @@ function EditorContent() {
       else if (q === "fhd") pixelRatio = Math.max(3, Math.ceil(1920 / w));
       else if (q === "4k") pixelRatio = Math.max(4, Math.ceil(2160 / w));
       await downloadAsPng(el, "frameos-quote.png", pixelRatio);
+      trackEvent("export_clicked", {
+        template: templateParam ?? "default",
+        quality: q,
+      });
     } catch (err) {
       console.error("[FrameOS] Export failed:", err);
     } finally {

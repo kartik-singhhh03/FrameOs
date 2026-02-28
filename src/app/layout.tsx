@@ -3,6 +3,7 @@ import Script from "next/script";
 import "./globals.css";
 import SessionProvider from "@/components/SessionProvider";
 import PaddleProvider from "@/components/PaddleProvider";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 export const metadata: Metadata = {
   title: "FrameOS — Create Viral-Ready Posts in Seconds",
@@ -72,6 +73,7 @@ export default function RootLayout({
         />
       </head>
       <body className="antialiased">
+        <GoogleAnalytics />
         <SessionProvider>
           <PaddleProvider />
           {children}
