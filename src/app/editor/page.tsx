@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { ArrowLeft, Download } from "lucide-react";
@@ -9,6 +9,14 @@ import { downloadAsPng } from "@/lib/download";
 import type { TemplateId } from "@/components/templates";
 
 export default function EditorPage() {
+  return (
+    <Suspense fallback={null}>
+      <EditorContent />
+    </Suspense>
+  );
+}
+
+function EditorContent() {
   const searchParams = useSearchParams();
   const templateParam = searchParams.get("template") as TemplateId | null;
   const canvasRef = useRef<HTMLDivElement>(null);
