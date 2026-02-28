@@ -110,7 +110,7 @@ export default function Footer() {
           </div>
           <div className="flex items-center gap-4">
             <a href="#" className="text-sm text-[#5A635A] hover:text-[#1C1F1C] transition font-medium">Privacy</a>
-            <a href="#" className="text-sm text-[#5A635A] hover:text-[#1C1F1C] transition font-medium">Terms</a>
+            <a href="/terms" className="text-sm text-[#5A635A] hover:text-[#1C1F1C] transition font-medium">Terms</a>
           </div>
         </div>
       </div>
