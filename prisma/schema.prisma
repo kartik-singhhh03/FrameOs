@@ -9,27 +9,44 @@ datasource db {
     provider = "postgresql"
 }
 
-// ─── Role enum ────────────────────────────────────────────────────────────────
-// Stored in the database. Never exposed to the frontend.
-// Default is USER; set to ADMIN via direct DB query (see README / migration notes).
+// Role: USER (default) or ADMIN. Set via direct DB query, never from the app.
 enum Role {
     USER
     ADMIN
 }
 
 model User {
-    id               String         @id @default(cuid())
+    id               String           @id @default(cuid())
     name             String?
-    email            String         @unique
+    email            String           @unique
     emailVerified    DateTime?
     image            String?
-    role             Role           @default(USER)
+    role             Role             @default(USER)
     paddleCustomerId String?
-    createdAt        DateTime       @default(now())
-    updatedAt        DateTime       @updatedAt
+    createdAt        DateTime         @default(now())
+    updatedAt        DateTime         @updatedAt
+    // Referral fields
+    referralCode     String           @unique @default(cuid())
+    referredById     String?
+    freeProUntil     DateTime?
     accounts         Account[]
     sessions         Session[]
     subscriptions    Subscription[]
+    referredBy       User?            @relation("UserReferrals", fields: [referredById], references: [id])
+    referrals        User[]           @relation("UserReferrals")
+    rewardsGiven     ReferralReward[] @relation("ReferrerRewards")
+    rewardsReceived  ReferralReward[] @relation("RefereeRewards")
+}
+
+model ReferralReward {
+    id         String   @id @default(cuid())
+    referrerId String
+    refereeId  String
+    createdAt  DateTime @default(now())
+    referrer   User     @relation("ReferrerRewards", fields: [referrerId], references: [id])
+    referee    User     @relation("RefereeRewards", fields: [refereeId], references: [id])
+
+    @@unique([referrerId, refereeId])
 }
 
 model Account {

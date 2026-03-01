@@ -1,16 +1,21 @@
-/**
- * NextAuth configuration.
- *
- * SECURITY — Role is intentionally excluded from the JWT and client session.
- * Role-based access is enforced exclusively in server-side API routes by
- * reading `user.role` directly from the database via Prisma.
- * The frontend never sees the role; it only receives { isPro: boolean } from
- * /api/subscription-status.
- */
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import GoogleProvider from "next-auth/providers/google";
 import type { NextAuthOptions } from "next-auth";
+import { nanoid } from "nanoid";
 import prisma from "./prisma";
+
+// Generates a unique 8-char referral code, retrying up to `attempts` times on collision.
+async function generateUniqueReferralCode(attempts = 5): Promise<string> {
+  for (let i = 0; i < attempts; i++) {
+    const code = nanoid(8);
+    const existing = await prisma.user.findUnique({
+      where: { referralCode: code },
+      select: { id: true },
+    });
+    if (!existing) return code;
+  }
+  return nanoid(16);
+}
 
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
@@ -32,18 +37,22 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user }) {
-      // Only the DB user id goes into the JWT — role is deliberately omitted.
-      if (user) {
-        token.id = user.id;
-      }
+      if (user) token.id = user.id;
       return token;
     },
     async session({ session, token }) {
-      // Only id is surfaced to the client — role is deliberately omitted.
-      if (session.user && token.id) {
-        session.user.id = token.id as string;
-      }
+      if (session.user && token.id) session.user.id = token.id as string;
       return session;
+    },
+  },
+  events: {
+    // Fires only on first sign-up — assigns a unique referral code.
+    async createUser({ user }) {
+      const code = await generateUniqueReferralCode();
+      await prisma.user.update({
+        where: { id: user.id },
+        data: { referralCode: code },
+      });
     },
   },
   pages: {

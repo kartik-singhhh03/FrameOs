@@ -862,7 +862,11 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
       const tmpl = TEMPLATES.find((t) => t.id === selectedTemplate);
       if (!tmpl) return <>{children}</>;
       const Comp = tmpl.component;
-      return <Comp socialData={sd} canvasWidth={canvasWidth}>{children}</Comp>;
+      return (
+        <Comp socialData={sd} canvasWidth={canvasWidth}>
+          {children}
+        </Comp>
+      );
     }
 
     // ─── Drag-to-reposition ───────────────────────────────────────────────────

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Metadata } from "next";
+import ReferralCodeInput from "@/components/ReferralCodeInput";
 
 export const metadata: Metadata = {
   title: "Pricing — FrameOS",
@@ -202,6 +203,9 @@ export default function PricingPage() {
             </Link>
           </div>
         </div>
+
+        {/* Referral code */}
+        <ReferralCodeInput />
 
         {/* Transparency notice */}
         <div className="glass-card rounded-2xl p-8 mb-6 space-y-4">
