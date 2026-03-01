@@ -5,6 +5,8 @@ import { useEffect } from "react";
 import Link from "next/link";
 import PaddleCheckoutButton from "@/components/PaddleCheckoutButton";
 import { trackEvent } from "@/lib/analytics";
+import ReferralShare from "@/components/ReferralShare";
+import ReferralCodeInput from "@/components/ReferralCodeInput";
 
 export default function UpgradePage() {
   const { data: session, status } = useSession();
@@ -135,6 +137,10 @@ export default function UpgradePage() {
             Secure checkout · Cancel anytime from your account
           </p>
         </div>
+
+        {/* Referral — share your code + enter a friend's code */}
+        <ReferralShare />
+        <ReferralCodeInput />
 
         <p className="text-center text-sm text-[#5A635A]">
           Want to try first?{" "}

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import ReferralCodeInput from "@/components/ReferralCodeInput";
+import ReferralShare from "@/components/ReferralShare";
 
 export const metadata: Metadata = {
   title: "Pricing — FrameOS",
@@ -8,7 +9,12 @@ export const metadata: Metadata = {
     "Simple, transparent pricing for FrameOS. Free plan available. Pro plan at $5/month.",
 };
 
-export default function PricingPage() {
+export default function PricingPage({
+  searchParams,
+}: {
+  searchParams?: { ref?: string };
+}) {
+  const refCode = searchParams?.ref ?? "";
   return (
     <main className="min-h-screen bg-[#ECE7E2] px-4 py-16">
       <div className="max-w-4xl mx-auto">
@@ -204,8 +210,9 @@ export default function PricingPage() {
           </div>
         </div>
 
-        {/* Referral code */}
-        <ReferralCodeInput />
+        {/* Referral — share your code + enter a friend's code */}
+        <ReferralShare />
+        <ReferralCodeInput defaultCode={refCode} />
 
         {/* Transparency notice */}
         <div className="glass-card rounded-2xl p-8 mb-6 space-y-4">

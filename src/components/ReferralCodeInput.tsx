@@ -4,8 +4,12 @@ import { useState, useRef, FormEvent } from "react";
 
 type Status = "idle" | "loading" | "success" | "error";
 
-export default function ReferralCodeInput() {
-  const [code, setCode] = useState("");
+export default function ReferralCodeInput({
+  defaultCode = "",
+}: {
+  defaultCode?: string;
+}) {
+  const [code, setCode] = useState(defaultCode);
   const [status, setStatus] = useState<Status>("idle");
   const [message, setMessage] = useState("");
   const inputRef = useRef<HTMLInputElement>(null);
