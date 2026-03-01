@@ -3,8 +3,9 @@
 import { useRef, useState, useCallback, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
-import { ArrowLeft, Download } from "lucide-react";
+import { ArrowLeft, Download, Share2 } from "lucide-react";
 import QuoteCanvas from "@/components/QuoteCanvas";
+import ShareModal from "@/components/ShareModal";
 import { downloadAsPng } from "@/lib/download";
 import type { TemplateId } from "@/components/templates";
 import { trackEvent } from "@/lib/analytics";
@@ -22,6 +23,7 @@ function EditorContent() {
   const templateParam = searchParams.get("template") as TemplateId | null;
   const canvasRef = useRef<HTMLDivElement>(null);
   const [isExporting, setIsExporting] = useState(false);
+  const [isShareOpen, setIsShareOpen] = useState(false);
   const exportQualityRef = useRef<string>("auto");
 
   const handleExportQualityChange = useCallback((quality: string) => {
@@ -129,27 +131,47 @@ function EditorContent() {
             </span>
           </div>
 
-          {/* Download — hidden on mobile (sticky bar below handles it) */}
-          <button
-            type="button"
-            onClick={handleDownload}
-            disabled={isExporting}
-            className="hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-[#252C25] to-[#AB6D48] shadow-md shadow-[#D9D3CC] hover:from-[#1F261F] hover:to-[#252C25] disabled:opacity-60 transition-all duration-150 min-h-[44px]"
-          >
-            <Download className="w-4 h-4" />
-            {isExporting ? "Exporting…" : "Download PNG"}
-          </button>
+          {/* Desktop: Share + Download buttons */}
+          <div className="hidden sm:flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setIsShareOpen(true)}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-[#1C1F1C] bg-[#F4F1ED] border border-[#D9D3CC] hover:bg-[#ECE7E2] shadow-sm transition-all duration-150 min-h-[44px]"
+            >
+              <Share2 className="w-4 h-4" />
+              Share
+            </button>
+            <button
+              type="button"
+              onClick={handleDownload}
+              disabled={isExporting}
+              className="flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-semibold text-white bg-gradient-to-r from-[#252C25] to-[#AB6D48] shadow-md shadow-[#D9D3CC] hover:from-[#1F261F] hover:to-[#252C25] disabled:opacity-60 transition-all duration-150 min-h-[44px]"
+            >
+              <Download className="w-4 h-4" />
+              {isExporting ? "Exporting…" : "Download PNG"}
+            </button>
+          </div>
 
-          {/* Mobile: icon-only download in topbar */}
-          <button
-            type="button"
-            onClick={handleDownload}
-            disabled={isExporting}
-            aria-label="Download PNG"
-            className="sm:hidden flex items-center justify-center w-10 h-10 rounded-xl text-white bg-gradient-to-r from-[#252C25] to-[#AB6D48] shadow-md disabled:opacity-60 transition-all"
-          >
-            <Download className="w-4 h-4" />
-          </button>
+          {/* Mobile: Share icon + Download icon in topbar */}
+          <div className="sm:hidden flex items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setIsShareOpen(true)}
+              aria-label="Share"
+              className="flex items-center justify-center w-10 h-10 rounded-xl text-[#1C1F1C] bg-[#F4F1ED] border border-[#D9D3CC] transition-all"
+            >
+              <Share2 className="w-4 h-4" />
+            </button>
+            <button
+              type="button"
+              onClick={handleDownload}
+              disabled={isExporting}
+              aria-label="Download PNG"
+              className="flex items-center justify-center w-10 h-10 rounded-xl text-white bg-gradient-to-r from-[#252C25] to-[#AB6D48] shadow-md disabled:opacity-60 transition-all"
+            >
+              <Download className="w-4 h-4" />
+            </button>
+          </div>
         </div>
       </header>
 
@@ -163,6 +185,13 @@ function EditorContent() {
           initialTemplateId={templateParam}
         />
       </main>
+
+      <ShareModal
+        isOpen={isShareOpen}
+        onClose={() => setIsShareOpen(false)}
+        canvasRef={canvasRef}
+        exportQualityRef={exportQualityRef}
+      />
     </div>
   );
 }

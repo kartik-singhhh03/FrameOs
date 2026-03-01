@@ -137,8 +137,9 @@ export default function Hero() {
 
         {/* Sub-headline */}
         <p className="text-lg md:text-xl text-[#5A635A] max-w-2xl mx-auto leading-relaxed mb-10 font-normal">
-          Design Mac-style frames, social post templates, and aesthetic
-          screenshots — all in one powerful editor.
+          Design Mac frames, social post cards, dev screenshots, and thread
+          carousels — then share directly to X, LinkedIn &amp; Instagram in one
+          click.
         </p>
 
         {/* CTAs */}

@@ -1,7 +1,11 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { TEMPLATES, SOCIAL_TEMPLATE_IDS } from "./templates/index";
+import {
+  TEMPLATES,
+  SOCIAL_TEMPLATE_IDS,
+  DEV_TEMPLATE_IDS,
+} from "./templates/index";
 import type { TemplateId, TemplateCategory } from "./templates/index";
 
 interface TemplateSelectorProps {
@@ -13,6 +17,7 @@ interface TemplateSelectorProps {
 const TAB_LABELS: { value: TemplateCategory; label: string }[] = [
   { value: "frames", label: "Frames" },
   { value: "social", label: "Social" },
+  { value: "dev", label: "Dev" },
 ];
 
 /**
@@ -26,13 +31,18 @@ export default function TemplateSelector({
 }: TemplateSelectorProps) {
   // Derive initial tab from the selected template
   const [activeTab, setActiveTab] = useState<TemplateCategory>(
-    (SOCIAL_TEMPLATE_IDS as string[]).includes(selected) ? "social" : "frames",
+    (DEV_TEMPLATE_IDS as string[]).includes(selected)
+      ? "dev"
+      : (SOCIAL_TEMPLATE_IDS as string[]).includes(selected)
+        ? "social"
+        : "frames",
   );
 
   // Keep tab in sync if external selection changes category
   useEffect(() => {
+    const isDev = (DEV_TEMPLATE_IDS as string[]).includes(selected);
     const isSocial = (SOCIAL_TEMPLATE_IDS as string[]).includes(selected);
-    setActiveTab(isSocial ? "social" : "frames");
+    setActiveTab(isDev ? "dev" : isSocial ? "social" : "frames");
   }, [selected]);
 
   const visibleTemplates = TEMPLATES.filter((t) => t.category === activeTab);
@@ -66,7 +76,11 @@ export default function TemplateSelector({
       <div
         className={[
           "grid gap-2",
-          activeTab === "frames" ? "grid-cols-5" : "grid-cols-3",
+          activeTab === "frames"
+            ? "grid-cols-5"
+            : activeTab === "dev"
+              ? "grid-cols-4"
+              : "grid-cols-3",
         ].join(" ")}
       >
         {visibleTemplates.map((t) => {
@@ -74,7 +88,8 @@ export default function TemplateSelector({
           const isSocialTemplate = (SOCIAL_TEMPLATE_IDS as string[]).includes(
             t.id,
           );
-          const isLocked = isSocialTemplate && !isPro;
+          const isDevTemplate = (DEV_TEMPLATE_IDS as string[]).includes(t.id);
+          const isLocked = (isSocialTemplate || isDevTemplate) && !isPro;
           return (
             <button
               key={t.id}
@@ -520,6 +535,272 @@ function TemplateMiniPreview({ id, active }: MiniPreviewProps) {
           />
         </div>
         <div style={{ height: 4, background: "#6c6ef2" }} />
+      </div>
+    );
+  }
+
+  // ── Dev templates ──────────────────────────────────────────────────────────
+
+  if (id === "dev-code") {
+    return (
+      <div
+        style={{
+          width: 44,
+          height: 36,
+          background: "#1e1e2e",
+          borderRadius: 5,
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div
+          style={{
+            background: "#13131f",
+            padding: "2px 4px",
+            display: "flex",
+            gap: 2,
+          }}
+        >
+          {["#ff5f57", "#febc2e", "#28c840"].map((c, i) => (
+            <div
+              key={i}
+              style={{
+                width: 3,
+                height: 3,
+                borderRadius: "50%",
+                background: c,
+              }}
+            />
+          ))}
+        </div>
+        <div
+          style={{
+            flex: 1,
+            padding: "3px 4px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 1.5,
+          }}
+        >
+          <div
+            style={{
+              height: 2,
+              width: "60%",
+              borderRadius: 1,
+              background: "#C792EA",
+            }}
+          />
+          <div
+            style={{
+              height: 2,
+              width: "80%",
+              borderRadius: 1,
+              background: "#C3E88D",
+            }}
+          />
+          <div
+            style={{
+              height: 2,
+              width: "50%",
+              borderRadius: 1,
+              background: "#82AAFF",
+            }}
+          />
+        </div>
+        <div style={{ height: 3, background: "#6c6ef2" }} />
+      </div>
+    );
+  }
+
+  if (id === "dev-terminal") {
+    return (
+      <div
+        style={{
+          width: 44,
+          height: 36,
+          background: "#0d0d0d",
+          borderRadius: 5,
+          overflow: "hidden",
+          display: "flex",
+          flexDirection: "column",
+        }}
+      >
+        <div
+          style={{
+            background: "#1a1a1a",
+            padding: "2px 4px",
+            display: "flex",
+            gap: 2,
+          }}
+        >
+          {["#ff5f57", "#febc2e", "#28c840"].map((c, i) => (
+            <div
+              key={i}
+              style={{
+                width: 3,
+                height: 3,
+                borderRadius: "50%",
+                background: c,
+              }}
+            />
+          ))}
+        </div>
+        <div
+          style={{
+            flex: 1,
+            padding: "3px 4px",
+            display: "flex",
+            flexDirection: "column",
+            gap: 2,
+          }}
+        >
+          <div style={{ display: "flex", alignItems: "center", gap: 2 }}>
+            <div
+              style={{
+                width: 4,
+                height: 4,
+                borderRadius: "50%",
+                background: "#22c55e",
+              }}
+            />
+            <div
+              style={{
+                height: 1.5,
+                flex: 1,
+                borderRadius: 1,
+                background: "#d4d4d4",
+              }}
+            />
+          </div>
+          <div
+            style={{
+              height: 1.5,
+              width: "70%",
+              borderRadius: 1,
+              background: "#888",
+            }}
+          />
+          <div
+            style={{
+              height: 1.5,
+              width: "55%",
+              borderRadius: 1,
+              background: "#22c55e",
+            }}
+          />
+        </div>
+      </div>
+    );
+  }
+
+  if (id === "dev-metrics") {
+    const metricBg = active ? "rgba(37,44,37,0.3)" : "#1C1F1C";
+    return (
+      <div
+        style={{
+          width: 44,
+          height: 36,
+          background: metricBg,
+          borderRadius: 5,
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "center",
+          gap: 2,
+        }}
+      >
+        <div
+          style={{
+            fontSize: 13,
+            fontWeight: 900,
+            color: "#fff",
+            lineHeight: 1,
+          }}
+        >
+          100
+        </div>
+        <div
+          style={{
+            height: 1.5,
+            width: "65%",
+            borderRadius: 1,
+            background: "rgba(255,255,255,0.4)",
+          }}
+        />
+        <div
+          style={{
+            height: 1.5,
+            width: "45%",
+            borderRadius: 1,
+            background: "rgba(255,255,255,0.2)",
+          }}
+        />
+      </div>
+    );
+  }
+
+  if (id === "dev-thread") {
+    const threadBg = active ? "rgba(37,44,37,0.12)" : "#F4F1ED";
+    const threadBorder = active ? "rgba(255,255,255,0.3)" : "#D9D3CC";
+    return (
+      <div
+        style={{
+          width: 44,
+          height: 36,
+          background: threadBg,
+          borderRadius: 5,
+          border: `1px solid ${threadBorder}`,
+          display: "flex",
+          flexDirection: "column",
+          padding: "4px 5px",
+          gap: 1.5,
+        }}
+      >
+        <div
+          style={{
+            height: 2,
+            width: "80%",
+            borderRadius: 1,
+            background: active ? "rgba(255,255,255,0.7)" : "#252C25",
+          }}
+        />
+        <div
+          style={{
+            height: 1.5,
+            width: "60%",
+            borderRadius: 1,
+            background: active ? "rgba(255,255,255,0.5)" : "#5A635A",
+          }}
+        />
+        <div
+          style={{
+            height: 1.5,
+            width: "70%",
+            borderRadius: 1,
+            background: active ? "rgba(255,255,255,0.5)" : "#5A635A",
+          }}
+        />
+        <div style={{ display: "flex", gap: 1.5, marginTop: "auto" }}>
+          {[0, 1, 2].map((d) => (
+            <div
+              key={d}
+              style={{
+                width: 4,
+                height: 2,
+                borderRadius: 1,
+                background:
+                  d === 0
+                    ? active
+                      ? "#fff"
+                      : "#252C25"
+                    : active
+                      ? "rgba(255,255,255,0.35)"
+                      : "#D9D3CC",
+              }}
+            />
+          ))}
+        </div>
       </div>
     );
   }

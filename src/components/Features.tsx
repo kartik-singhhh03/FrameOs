@@ -119,6 +119,66 @@ const ICONS = [
       d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
     />
   </svg>,
+  // Dev Mode Templates
+  <svg
+    key={8}
+    className="w-5 h-5 text-[#252C25]"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"
+    />
+  </svg>,
+  // One-click Share
+  <svg
+    key={9}
+    className="w-5 h-5 text-[#252C25]"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+    />
+  </svg>,
+  // Thread Carousel
+  <svg
+    key={10}
+    className="w-5 h-5 text-[#252C25]"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+    />
+  </svg>,
+  // Referral
+  <svg
+    key={11}
+    className="w-5 h-5 text-[#252C25]"
+    fill="none"
+    stroke="currentColor"
+    viewBox="0 0 24 24"
+  >
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth={1.5}
+      d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+    />
+  </svg>,
 ];
 
 const features = [
@@ -153,6 +213,22 @@ const features = [
   {
     title: "High-Resolution Export",
     desc: "Export at 1x, 2x, or 4K quality. Pixel-perfect PNG output that matches the live preview exactly — watermark-free on Pro.",
+  },
+  {
+    title: "Dev Mode Templates",
+    desc: "Code snippet cards, terminal screenshots, metrics milestones, and thread carousels — purpose-built for developers building in public.",
+  },
+  {
+    title: "One-click Social Share",
+    desc: "Share to X, LinkedIn, and Instagram directly from the editor. Image downloads automatically, caption copies to clipboard — no OAuth, no friction.",
+  },
+  {
+    title: "Thread Carousel Builder",
+    desc: "Write multi-slide thread content, navigate between slides with arrow keys, and export each card individually — perfect for X threads.",
+  },
+  {
+    title: "Referral & Invite",
+    desc: "Share your unique invite link with friends. Both you and your referral unlock Pro perks — grow your network while creating.",
   },
 ];
 
@@ -200,7 +276,7 @@ export default function Features() {
         <div className="mt-12 glass-card rounded-2xl p-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {[
             { val: "10×", label: "Faster than Canva" },
-            { val: "20+", label: "Ready-made templates" },
+            { val: "25+", label: "Ready-made templates" },
             { val: "4K", label: "Export resolution" },
             { val: "4.9★", label: "Average user rating" },
           ].map((stat, i) => (

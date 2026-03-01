@@ -17,12 +17,20 @@ import ThreadsPostTemplate from "./social/ThreadsPostTemplate";
 import NotionPageTemplate from "./social/NotionPageTemplate";
 import CodeSnippetTemplate from "./social/CodeSnippetTemplate";
 
+import CodeTemplate from "./dev/CodeTemplate";
+import TerminalTemplate from "./dev/TerminalTemplate";
+import MetricsTemplate from "./dev/MetricsTemplate";
+import ThreadTemplate from "./dev/ThreadTemplate";
+
+export { DEFAULT_DEV_DATA, splitIntoSlides } from "./dev/devTypes";
+
 export type {
   TemplateId,
   TemplateDefinition,
   TemplateProps,
   TemplateCategory,
   SocialData,
+  DevData,
 } from "./types";
 export { DEFAULT_SOCIAL_DATA } from "./types";
 
@@ -44,6 +52,11 @@ export {
   ThreadsPostTemplate,
   NotionPageTemplate,
   CodeSnippetTemplate,
+  // Dev
+  CodeTemplate,
+  TerminalTemplate,
+  MetricsTemplate,
+  ThreadTemplate,
 };
 
 // ─── Registry ─────────────────────────────────────────────────────────────────
@@ -190,6 +203,39 @@ export const TEMPLATES: TemplateDefinition[] = [
     component: CodeSnippetTemplate,
     category: "social",
   },
+  // ── Dev ──────────────────────────────────────────────────────────
+  {
+    id: "dev-code",
+    name: "Code",
+    description: "VS Code–inspired editor with syntax highlighting",
+    previewIcon: "</>",
+    component: CodeTemplate,
+    category: "dev",
+  },
+  {
+    id: "dev-terminal",
+    name: "Terminal",
+    description: "Fake macOS terminal screenshot",
+    previewIcon: "$_",
+    component: TerminalTemplate,
+    category: "dev",
+  },
+  {
+    id: "dev-metrics",
+    name: "Metrics",
+    description: "Build-in-public milestone announcement",
+    previewIcon: "#1",
+    component: MetricsTemplate,
+    category: "dev",
+  },
+  {
+    id: "dev-thread",
+    name: "Thread",
+    description: "Auto-split long text into carousel slides",
+    previewIcon: "≡",
+    component: ThreadTemplate,
+    category: "dev",
+  },
 ];
 
 export const DEFAULT_TEMPLATE_ID = "mac-window";
@@ -201,4 +247,11 @@ export const SOCIAL_TEMPLATE_IDS: TemplateId[] = [
   "threads-post",
   "notion-page",
   "code-snippet",
+];
+
+export const DEV_TEMPLATE_IDS: TemplateId[] = [
+  "dev-code",
+  "dev-terminal",
+  "dev-metrics",
+  "dev-thread",
 ];

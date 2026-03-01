@@ -1,7 +1,7 @@
 const audiences = [
   {
     title: "X / Twitter Creators",
-    desc: "Make your threads stand out with viral-ready quote cards, branded visuals, and social post templates — in seconds.",
+    desc: "Make your threads pop with quote cards, thread carousels, and one-click share to X — caption auto-copies, image auto-downloads.",
     bg: "#1C1F1C",
   },
   {
@@ -10,8 +10,8 @@ const audiences = [
     bg: "#252C25",
   },
   {
-    title: "Indie Hackers",
-    desc: "Ship beautiful launch screenshots, product mockups, and milestone posts — without a designer on your team.",
+    title: "Indie Hackers & Devs",
+    desc: "Ship code snippet cards, terminal screenshots, metrics milestones, and thread carousels — without a designer on your team.",
     bg: "#AB6D48",
   },
   {

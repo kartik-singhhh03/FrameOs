@@ -6,13 +6,13 @@ import Footer from "@/components/Footer";
 // ─── Template Demo Data ───────────────────────────────────────────────────────
 // Each card has enough info to render a static visual demo in pure CSS/JSX.
 
-type Category = "all" | "frames" | "social";
+type Category = "all" | "frames" | "social" | "dev";
 
 interface TemplateCard {
   id: string;
   name: string;
   desc: string;
-  category: "frames" | "social";
+  category: "frames" | "social" | "dev";
   icon: string;
   isPro: boolean;
   demo: React.FC;
@@ -472,6 +472,168 @@ function DemoCode() {
   );
 }
 
+// ── Dev Mode demo components ────────────────────────────────────────────────
+
+function DemoTerminal() {
+  return (
+    <div className="w-full max-w-xs mx-auto rounded-xl overflow-hidden border border-[#1E1E1E] shadow-lg">
+      <div className="bg-[#1E1E1E] px-3 py-2 flex items-center gap-1.5">
+        {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
+          <span
+            key={c}
+            className="w-2.5 h-2.5 rounded-full"
+            style={{ background: c }}
+          />
+        ))}
+        <span className="text-[9px] text-[#6C6EAF] ml-2 flex-1 text-center">
+          bash — 80×24
+        </span>
+      </div>
+      <div
+        className="bg-[#0D1117] p-4"
+        style={{ fontFamily: "'Courier New', monospace" }}
+      >
+        <p className="text-[10px] text-[#58A6FF] mb-1">$ npm run deploy</p>
+        <p className="text-[10px] text-[#3FB950] mb-0.5">
+          ✓ Build successful in 2.3s
+        </p>
+        <p className="text-[10px] text-[#3FB950] mb-0.5">
+          ✓ 23 files uploaded to CDN
+        </p>
+        <p className="text-[10px] text-[#3FB950] mb-0.5">
+          ✓ Edge functions deployed
+        </p>
+        <p className="text-[10px] text-[#8B949E] mb-0.5">
+          → Live at frameos.app
+        </p>
+        <p className="text-[10px] text-[#58A6FF] mt-2">
+          $ <span className="animate-pulse">▋</span>
+        </p>
+      </div>
+    </div>
+  );
+}
+
+function DemoDevMetrics() {
+  return (
+    <div
+      className="w-full max-w-xs mx-auto rounded-xl overflow-hidden shadow-lg"
+      style={{ background: "linear-gradient(135deg, #0a0a0a, #1a1a2e)" }}
+    >
+      <div className="p-6 text-center">
+        <div
+          className="inline-block text-[10px] font-bold px-3 py-1 rounded-full mb-3"
+          style={{
+            background: "rgba(255,255,255,0.08)",
+            border: "1px solid rgba(255,255,255,0.12)",
+            color: "rgba(255,255,255,0.55)",
+            letterSpacing: "0.05em",
+          }}
+        >
+          🚀 MILESTONE
+        </div>
+        <p className="text-5xl font-black text-white leading-none tracking-tighter mb-1">
+          1,000
+        </p>
+        <p className="text-base font-bold text-white/90 mb-1">Users</p>
+        <p className="text-[11px] text-white/50">in 14 days since launch</p>
+        <div
+          className="mx-auto mt-4 rounded-full"
+          style={{ width: 36, height: 2, background: "rgba(255,255,255,0.12)" }}
+        />
+      </div>
+    </div>
+  );
+}
+
+function DemoDevThread() {
+  return (
+    <div className="w-full max-w-xs mx-auto rounded-xl overflow-hidden border border-[#D9D3CC] shadow-sm bg-white">
+      <div className="px-4 pt-4 pb-2">
+        <div className="flex items-center gap-2 mb-2">
+          <div className="w-7 h-7 rounded-full bg-[#252C25] flex items-center justify-center text-white text-[9px] font-bold">
+            K
+          </div>
+          <div>
+            <p className="text-[10px] font-bold text-[#1C1F1C]">
+              kartik.builds
+            </p>
+          </div>
+        </div>
+        <p className="text-[11px] text-[#1C1F1C] leading-relaxed font-medium mb-2">
+          🧵 Thread 1/4
+        </p>
+        <p className="text-[10px] text-[#5A635A] leading-relaxed">
+          Here's what I learned after shipping 3 products in 1 year...
+        </p>
+      </div>
+      <div className="flex justify-center gap-1.5 pb-3">
+        {[true, false, false, false].map((active, i) => (
+          <div
+            key={i}
+            className="rounded-full"
+            style={{
+              width: active ? 16 : 6,
+              height: 6,
+              background: active ? "#252C25" : "#D9D3CC",
+              transition: "all 0.2s",
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function DemoDevCodeCard() {
+  return (
+    <div className="w-full max-w-xs mx-auto rounded-xl overflow-hidden border border-[#1E1E3A] shadow-lg">
+      <div className="bg-[#13131F] px-3 py-2 flex items-center gap-1.5">
+        {["#ff5f57", "#febc2e", "#28c840"].map((c) => (
+          <span
+            key={c}
+            className="w-2.5 h-2.5 rounded-full"
+            style={{ background: c }}
+          />
+        ))}
+        <span className="text-[9px] text-[#6C6EAF] ml-2">ship.ts</span>
+        <span className="ml-auto text-[9px] text-[#3FB950] font-bold">
+          ✓ compiled
+        </span>
+      </div>
+      <div className="bg-[#1E1E2E] p-4">
+        <p
+          className="text-[10px] leading-relaxed"
+          style={{ fontFamily: "'Courier New', monospace", color: "#569CD6" }}
+        >
+          function <span style={{ color: "#DCDCAA" }}>shipIt</span>() {"{"}
+        </p>
+        <p
+          className="text-[10px] leading-relaxed ml-4"
+          style={{ fontFamily: "'Courier New', monospace", color: "#9CDCFE" }}
+        >
+          {" "}
+          const idea ={" "}
+          <span style={{ color: "#CE9178" }}>"done &gt; perfect"</span>;
+        </p>
+        <p
+          className="text-[10px] leading-relaxed ml-4"
+          style={{ fontFamily: "'Courier New', monospace", color: "#9CDCFE" }}
+        >
+          {" "}
+          return <span style={{ color: "#DCDCAA" }}>launch</span>(idea);
+        </p>
+        <p
+          className="text-[10px] leading-relaxed"
+          style={{ fontFamily: "'Courier New', monospace", color: "#569CD6" }}
+        >
+          {"}"}
+        </p>
+      </div>
+    </div>
+  );
+}
+
 // ── Template catalog ─────────────────────────────────────────────────────────
 
 const TEMPLATE_CARDS: TemplateCard[] = [
@@ -628,6 +790,43 @@ const TEMPLATE_CARDS: TemplateCard[] = [
     isPro: true,
     demo: DemoCode,
   },
+  // ── Dev Mode templates ──
+  {
+    id: "dev-code",
+    name: "Dev Code Card",
+    desc: "Syntax-highlighted code on a dark VS Code canvas — perfect for sharing snippets",
+    category: "dev",
+    icon: "⌨️",
+    isPro: true,
+    demo: DemoDevCodeCard,
+  },
+  {
+    id: "dev-terminal",
+    name: "Terminal Screenshot",
+    desc: "Styled terminal window — share deploys, build output, or CLI wins beautifully",
+    category: "dev",
+    icon: "⚡",
+    isPro: true,
+    demo: DemoTerminal,
+  },
+  {
+    id: "dev-metrics",
+    name: "Metrics Milestone",
+    desc: "Bold milestone announcement card — users, revenue, stars. Built to go viral.",
+    category: "dev",
+    icon: "📈",
+    isPro: true,
+    demo: DemoDevMetrics,
+  },
+  {
+    id: "dev-thread",
+    name: "Thread Carousel",
+    desc: "Multi-slide thread builder — write, navigate, and export each card for X threads",
+    category: "dev",
+    icon: "🧵",
+    isPro: true,
+    demo: DemoDevThread,
+  },
 ];
 
 const CATEGORIES: { id: Category; label: string; count: number }[] = [
@@ -641,6 +840,11 @@ const CATEGORIES: { id: Category; label: string; count: number }[] = [
     id: "social",
     label: "Social Posts",
     count: TEMPLATE_CARDS.filter((t) => t.category === "social").length,
+  },
+  {
+    id: "dev",
+    label: "Dev Modes",
+    count: TEMPLATE_CARDS.filter((t) => t.category === "dev").length,
   },
 ];
 
@@ -661,7 +865,7 @@ export default function TemplatesPage() {
         {/* ── Hero ── */}
         <section className="pt-36 pb-16 px-6 text-center">
           <div className="max-w-3xl mx-auto">
-            <span className="section-tag">17 templates</span>
+            <span className="section-tag">21 templates</span>
             <h1 className="text-4xl md:text-5xl font-extrabold text-[#1C1F1C] mt-4 mb-4 leading-tight tracking-tight">
               Every template you need to{" "}
               <span className="text-gradient">go viral</span>
@@ -817,8 +1021,10 @@ export default function TemplatesPage() {
                   <span style={{ color: "#AB6D48" }}>Pro templates</span>
                 </h2>
                 <p className="text-white/60 text-sm mb-6 max-w-md mx-auto">
-                  Get access to all 12 premium templates, watermark-free 4K
-                  exports, Scene Mode, and advanced typography tools.
+                  Unlock all 16 premium templates — including Dev Modes
+                  (Terminal, Metrics, Thread Carousel, Code Cards),
+                  watermark-free 4K exports, Scene Mode, and advanced
+                  typography.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-3 justify-center">
                   <a

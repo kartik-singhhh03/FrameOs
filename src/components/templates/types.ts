@@ -1,4 +1,6 @@
 import type { ReactNode, ComponentType } from "react";
+import type { DevData } from "./dev/devTypes";
+export type { DevData } from "./dev/devTypes";
 
 // ─── Social Data ───────────────────────────────────────────────────────────────
 
@@ -43,11 +45,15 @@ export interface TemplateProps {
   socialData?: SocialData;
   /** Canvas pixel width — social templates use this so their container matches the canvas exactly */
   canvasWidth?: number;
+  /** Canvas pixel height — used by dev templates for fixed-size rendering */
+  canvasHeight?: number;
+  /** Passed to dev templates; frame / social templates safely ignore it */
+  devData?: DevData;
 }
 
 // ─── Template Registry ─────────────────────────────────────────────────────────
 
-export type TemplateCategory = "frames" | "social";
+export type TemplateCategory = "frames" | "social" | "dev";
 
 export type TemplateId =
   | "mac-window"
@@ -66,7 +72,11 @@ export type TemplateId =
   | "instagram-post"
   | "threads-post"
   | "notion-page"
-  | "code-snippet";
+  | "code-snippet"
+  | "dev-code"
+  | "dev-terminal"
+  | "dev-metrics"
+  | "dev-thread";
 
 export interface TemplateDefinition {
   id: TemplateId;

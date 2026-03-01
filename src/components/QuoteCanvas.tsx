@@ -31,8 +31,12 @@ import {
   DEFAULT_TEMPLATE_ID,
   SOCIAL_TEMPLATE_IDS,
   DEFAULT_SOCIAL_DATA,
+  DEV_TEMPLATE_IDS,
+  DEFAULT_DEV_DATA,
+  splitIntoSlides,
 } from "./templates/index";
-import type { TemplateId, SocialData } from "./templates/index";
+import type { TemplateId, SocialData, DevData } from "./templates/index";
+import BuildBadge from "./templates/dev/BuildBadge";
 import SceneLayer, { SCENE_OPTIONS } from "./SceneLayer";
 import type { SceneType } from "./SceneLayer";
 import {
@@ -740,6 +744,26 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
       if (file) setSocial({ profileImageUrl: URL.createObjectURL(file) });
     };
 
+    // ── Dev template state ──
+    const [devData, setDevData] = useState<DevData>(DEFAULT_DEV_DATA);
+    const setDev = (patch: Partial<DevData>) =>
+      setDevData((prev) => ({ ...prev, ...patch }));
+    const isDev = (DEV_TEMPLATE_IDS as string[]).includes(selectedTemplate);
+
+    // Thread slide navigation
+    const [threadCurrentSlide, setThreadCurrentSlide] = useState(0);
+    const threadSlides = useMemo(
+      () => splitIntoSlides(devData.threadText),
+      [devData.threadText],
+    );
+    const prevThreadTextRef = useRef(devData.threadText);
+    useEffect(() => {
+      if (devData.threadText !== prevThreadTextRef.current) {
+        prevThreadTextRef.current = devData.threadText;
+        setThreadCurrentSlide(0);
+      }
+    }, [devData.threadText]);
+
     // â”€â”€ Canvas responsive scaling â”€â”€
     // canvasAreaRef measures the available preview width on screen.
     // previewScale shrinks the export-container to fit without overflow.
@@ -766,8 +790,17 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
       };
       if (isSocial && socialWidths[selectedTemplate])
         return socialWidths[selectedTemplate];
+      // Dev templates use the standard canvas width
+      if (isDev) return canvasWidth;
       return canvasWidth;
-    }, [sceneEnabled, sceneScale, isSocial, selectedTemplate, canvasWidth]);
+    }, [
+      sceneEnabled,
+      sceneScale,
+      isSocial,
+      isDev,
+      selectedTemplate,
+      canvasWidth,
+    ]);
 
     useEffect(() => {
       const el = canvasAreaRef.current;
@@ -863,7 +896,12 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
       if (!tmpl) return <>{children}</>;
       const Comp = tmpl.component;
       return (
-        <Comp socialData={sd} canvasWidth={canvasWidth}>
+        <Comp
+          socialData={sd}
+          canvasWidth={canvasWidth}
+          canvasHeight={canvasHeight}
+          devData={devData}
+        >
           {children}
         </Comp>
       );
@@ -1177,7 +1215,13 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
               whiteSpace: "pre-wrap",
             }}
           >
-            {renderQuoteText(s.quote)}
+            {renderQuoteText(
+              isDev &&
+                selectedTemplate === "dev-thread" &&
+                threadSlides.length > 0
+                ? (threadSlides[threadCurrentSlide] ?? "")
+                : s.quote,
+            )}
           </p>
 
           {/* Author */}
@@ -1197,6 +1241,48 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
             </p>
           )}
         </div>
+
+        {/* Thread Slide Indicator — rendered on canvas */}
+        {isDev &&
+          selectedTemplate === "dev-thread" &&
+          devData.showSlideIndicator &&
+          threadSlides.length > 1 && (
+            <div
+              style={{
+                position: "absolute",
+                bottom: 14,
+                left: "50%",
+                transform: "translateX(-50%)",
+                display: "flex",
+                gap: 5,
+                alignItems: "center",
+                pointerEvents: "none",
+                userSelect: "none",
+              }}
+              aria-hidden="true"
+            >
+              {threadSlides.map((_, i) => (
+                <div
+                  key={i}
+                  style={{
+                    width: i === threadCurrentSlide ? 18 : 6,
+                    height: 6,
+                    borderRadius: 99,
+                    background:
+                      i === threadCurrentSlide
+                        ? effectiveTextColor
+                        : `${effectiveTextColor}55`,
+                    transition: "width 0.2s",
+                  }}
+                />
+              ))}
+            </div>
+          )}
+
+        {/* Build-in-Public badge overlay */}
+        {isDev && devData.badgeEnabled && (
+          <BuildBadge text={devData.badgeText} opacity={devData.badgeOpacity} />
+        )}
 
         {/* Watermark */}
         {effectiveWatermark && (
@@ -2241,6 +2327,450 @@ const QuoteCanvas = forwardRef<HTMLDivElement, QuoteCanvasProps>(
                         </button>
                       </div>
                     </div>
+                  </ControlGroup>
+                </div>
+              )}
+
+              {/* ── Dev Mode Controls ──────────────────────────────── */}
+              {isDev && (
+                <div className="px-4 sm:px-5">
+                  {/* Code Template */}
+                  {selectedTemplate === "dev-code" && (
+                    <ControlGroup
+                      label="Code Settings"
+                      sectionId="dev-code"
+                      collapsed={collapsed["dev-code"]}
+                      onToggle={() => toggleSection("dev-code")}
+                    >
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="space-y-1">
+                          <label className="text-xs font-semibold text-[#1C1F1C]">
+                            Language
+                          </label>
+                          <select
+                            value={devData.language}
+                            onChange={(e) =>
+                              setDev({
+                                language: e.target.value as DevData["language"],
+                              })
+                            }
+                            className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
+                          >
+                            {(
+                              [
+                                "tsx",
+                                "ts",
+                                "jsx",
+                                "js",
+                                "python",
+                                "go",
+                                "rust",
+                                "bash",
+                              ] as const
+                            ).map((l) => (
+                              <option key={l} value={l}>
+                                {l}
+                              </option>
+                            ))}
+                          </select>
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-xs font-semibold text-[#1C1F1C]">
+                            Filename
+                          </label>
+                          <input
+                            type="text"
+                            value={devData.filename}
+                            onChange={(e) =>
+                              setDev({ filename: e.target.value })
+                            }
+                            placeholder="index.tsx"
+                            className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] placeholder-[#5A635A]/50 focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
+                          />
+                        </div>
+                      </div>
+                      <div className="space-y-1">
+                        <label className="text-xs font-semibold text-[#1C1F1C]">
+                          Code
+                        </label>
+                        <textarea
+                          rows={6}
+                          value={devData.code}
+                          onChange={(e) => setDev({ code: e.target.value })}
+                          placeholder="Paste your code here…"
+                          spellCheck={false}
+                          className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2 text-xs text-[#1C1F1C] placeholder-[#5A635A]/50 resize-none focus:outline-none focus:ring-2 focus:ring-[#252C25] transition font-mono"
+                        />
+                      </div>
+                      <div className="flex items-center justify-between gap-3">
+                        {(
+                          [
+                            ["Line numbers", "showLineNumbers"],
+                            ["Mac header", "showMacHeader"],
+                          ] as [string, keyof DevData][]
+                        ).map(([lbl, key]) => (
+                          <div
+                            key={String(key)}
+                            className="flex items-center gap-2"
+                          >
+                            <span className="text-xs font-semibold text-[#1C1F1C]">
+                              {lbl}
+                            </span>
+                            <button
+                              type="button"
+                              role="switch"
+                              aria-checked={!!devData[key]}
+                              onClick={() => setDev({ [key]: !devData[key] })}
+                              className={[
+                                "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25]",
+                                devData[key] ? "bg-[#252C25]" : "bg-[#D9D3CC]",
+                              ].join(" ")}
+                            >
+                              <span
+                                className={[
+                                  "pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transition-transform duration-200",
+                                  devData[key]
+                                    ? "translate-x-6"
+                                    : "translate-x-1",
+                                ].join(" ")}
+                              />
+                            </button>
+                          </div>
+                        ))}
+                      </div>
+                    </ControlGroup>
+                  )}
+
+                  {/* Terminal Template */}
+                  {selectedTemplate === "dev-terminal" && (
+                    <ControlGroup
+                      label="Terminal Settings"
+                      sectionId="dev-terminal"
+                      collapsed={collapsed["dev-terminal"]}
+                      onToggle={() => toggleSection("dev-terminal")}
+                    >
+                      <div className="space-y-1">
+                        <label className="text-xs font-semibold text-[#1C1F1C]">
+                          Terminal output
+                        </label>
+                        <textarea
+                          rows={6}
+                          value={devData.terminalLines}
+                          onChange={(e) =>
+                            setDev({
+                              terminalLines: e.target.value,
+                            })
+                          }
+                          placeholder={"$ npm install\nadded 42 packages"}
+                          spellCheck={false}
+                          className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2 text-xs text-[#1C1F1C] placeholder-[#5A635A]/50 resize-none focus:outline-none focus:ring-2 focus:ring-[#252C25] transition font-mono"
+                        />
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="space-y-1">
+                          <label className="text-xs font-semibold text-[#1C1F1C]">
+                            Prompt char
+                          </label>
+                          <input
+                            type="text"
+                            value={devData.prompt}
+                            onChange={(e) => setDev({ prompt: e.target.value })}
+                            placeholder="$"
+                            className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] placeholder-[#5A635A]/50 focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-xs font-semibold text-[#1C1F1C]">
+                            Accent color
+                          </label>
+                          <div className="flex items-center gap-2">
+                            <input
+                              type="color"
+                              value={devData.terminalAccentColor}
+                              onChange={(e) =>
+                                setDev({ terminalAccentColor: e.target.value })
+                              }
+                              className="h-9 w-12 cursor-pointer rounded-xl border border-[#D9D3CC] bg-transparent p-0.5"
+                            />
+                            <span className="text-xs text-[#5A635A]">
+                              {devData.terminalAccentColor}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs font-semibold text-[#1C1F1C]">
+                          Show header
+                        </span>
+                        <button
+                          type="button"
+                          role="switch"
+                          aria-checked={devData.showTerminalHeader}
+                          onClick={() =>
+                            setDev({
+                              showTerminalHeader: !devData.showTerminalHeader,
+                            })
+                          }
+                          className={[
+                            "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25]",
+                            devData.showTerminalHeader
+                              ? "bg-[#252C25]"
+                              : "bg-[#D9D3CC]",
+                          ].join(" ")}
+                        >
+                          <span
+                            className={[
+                              "pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transition-transform duration-200",
+                              devData.showTerminalHeader
+                                ? "translate-x-6"
+                                : "translate-x-1",
+                            ].join(" ")}
+                          />
+                        </button>
+                      </div>
+                    </ControlGroup>
+                  )}
+
+                  {/* Metrics Template */}
+                  {selectedTemplate === "dev-metrics" && (
+                    <ControlGroup
+                      label="Metrics Settings"
+                      sectionId="dev-metrics"
+                      collapsed={collapsed["dev-metrics"]}
+                      onToggle={() => toggleSection("dev-metrics")}
+                    >
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="space-y-1">
+                          <label className="text-xs font-semibold text-[#1C1F1C]">
+                            Value
+                          </label>
+                          <input
+                            type="text"
+                            value={devData.metricValue}
+                            onChange={(e) =>
+                              setDev({ metricValue: e.target.value })
+                            }
+                            placeholder="$12,400"
+                            className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] placeholder-[#5A635A]/50 focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-xs font-semibold text-[#1C1F1C]">
+                            Label
+                          </label>
+                          <input
+                            type="text"
+                            value={devData.metricLabel}
+                            onChange={(e) =>
+                              setDev({ metricLabel: e.target.value })
+                            }
+                            placeholder="Monthly Revenue"
+                            className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] placeholder-[#5A635A]/50 focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
+                          />
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="space-y-1">
+                          <label className="text-xs font-semibold text-[#1C1F1C]">
+                            Subtext
+                          </label>
+                          <input
+                            type="text"
+                            value={devData.metricSubtext}
+                            onChange={(e) =>
+                              setDev({ metricSubtext: e.target.value })
+                            }
+                            placeholder="+18% from last month"
+                            className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] placeholder-[#5A635A]/50 focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-xs font-semibold text-[#1C1F1C]">
+                            Badge
+                          </label>
+                          <input
+                            type="text"
+                            value={devData.metricBadge}
+                            onChange={(e) =>
+                              setDev({ metricBadge: e.target.value })
+                            }
+                            placeholder="↑ 18%"
+                            className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] placeholder-[#5A635A]/50 focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
+                          />
+                        </div>
+                      </div>
+                    </ControlGroup>
+                  )}
+
+                  {/* Thread Template */}
+                  {selectedTemplate === "dev-thread" && (
+                    <ControlGroup
+                      label="Thread Settings"
+                      sectionId="dev-thread"
+                      collapsed={collapsed["dev-thread"]}
+                      onToggle={() => toggleSection("dev-thread")}
+                    >
+                      <div className="space-y-1">
+                        <label className="text-xs font-semibold text-[#1C1F1C]">
+                          Thread text
+                        </label>
+                        <p className="text-[10px] text-[#5A635A]">
+                          Separate slides with a blank line. Long paragraphs
+                          split automatically at 280 chars.
+                        </p>
+                        <textarea
+                          rows={7}
+                          value={devData.threadText}
+                          onChange={(e) =>
+                            setDev({ threadText: e.target.value })
+                          }
+                          placeholder={
+                            "Slide 1 content\n\nSlide 2 content\n\nSlide 3 content"
+                          }
+                          className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2 text-sm text-[#1C1F1C] placeholder-[#5A635A]/50 resize-none focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
+                        />
+                      </div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <button
+                            type="button"
+                            disabled={threadCurrentSlide === 0}
+                            onClick={() =>
+                              setThreadCurrentSlide((p) => Math.max(0, p - 1))
+                            }
+                            className="rounded-xl border border-[#D9D3CC] bg-[#F4F1ED] hover:bg-[#ECE7E2] disabled:opacity-30 px-3 py-1.5 text-xs font-semibold text-[#1C1F1C] transition"
+                          >
+                            ← Prev
+                          </button>
+                          <span className="text-xs text-[#5A635A] font-medium">
+                            {threadSlides.length > 0
+                              ? `${threadCurrentSlide + 1} / ${threadSlides.length}`
+                              : "—"}
+                          </span>
+                          <button
+                            type="button"
+                            disabled={
+                              threadCurrentSlide >= threadSlides.length - 1
+                            }
+                            onClick={() =>
+                              setThreadCurrentSlide((p) =>
+                                Math.min(threadSlides.length - 1, p + 1),
+                              )
+                            }
+                            className="rounded-xl border border-[#D9D3CC] bg-[#F4F1ED] hover:bg-[#ECE7E2] disabled:opacity-30 px-3 py-1.5 text-xs font-semibold text-[#1C1F1C] transition"
+                          >
+                            Next →
+                          </button>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-xs font-semibold text-[#1C1F1C]">
+                            Slide indicator
+                          </span>
+                          <button
+                            type="button"
+                            role="switch"
+                            aria-checked={devData.showSlideIndicator}
+                            onClick={() =>
+                              setDev({
+                                showSlideIndicator: !devData.showSlideIndicator,
+                              })
+                            }
+                            className={[
+                              "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25]",
+                              devData.showSlideIndicator
+                                ? "bg-[#252C25]"
+                                : "bg-[#D9D3CC]",
+                            ].join(" ")}
+                          >
+                            <span
+                              className={[
+                                "pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transition-transform duration-200",
+                                devData.showSlideIndicator
+                                  ? "translate-x-6"
+                                  : "translate-x-1",
+                              ].join(" ")}
+                            />
+                          </button>
+                        </div>
+                      </div>
+                    </ControlGroup>
+                  )}
+
+                  {/* Build Badge (visible for all dev modes) */}
+                  <ControlGroup
+                    label="Build Badge"
+                    sectionId="dev-badge"
+                    collapsed={collapsed["dev-badge"]}
+                    onToggle={() => toggleSection("dev-badge")}
+                  >
+                    <div
+                      className="flex items-center gap-2"
+                      style={{ minHeight: 44 }}
+                    >
+                      <span className="text-xs font-semibold text-[#1C1F1C]">
+                        Show badge
+                      </span>
+                      <button
+                        type="button"
+                        role="switch"
+                        aria-checked={devData.badgeEnabled}
+                        onClick={() =>
+                          setDev({ badgeEnabled: !devData.badgeEnabled })
+                        }
+                        className={[
+                          "relative inline-flex h-7 w-12 items-center rounded-full transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#252C25]",
+                          devData.badgeEnabled
+                            ? "bg-[#252C25]"
+                            : "bg-[#D9D3CC]",
+                        ].join(" ")}
+                      >
+                        <span
+                          className={[
+                            "pointer-events-none inline-block h-5 w-5 rounded-full bg-white shadow transition-transform duration-200",
+                            devData.badgeEnabled
+                              ? "translate-x-6"
+                              : "translate-x-1",
+                          ].join(" ")}
+                        />
+                      </button>
+                    </div>
+                    {devData.badgeEnabled && (
+                      <>
+                        <div className="space-y-1">
+                          <label className="text-xs font-semibold text-[#1C1F1C]">
+                            Badge text
+                          </label>
+                          <input
+                            type="text"
+                            value={devData.badgeText}
+                            onChange={(e) =>
+                              setDev({ badgeText: e.target.value })
+                            }
+                            placeholder="Building in public"
+                            className="w-full rounded-2xl border border-[#D9D3CC] bg-[#ECE7E2]/90 px-3 py-2.5 text-sm text-[#1C1F1C] placeholder-[#5A635A]/50 focus:outline-none focus:ring-2 focus:ring-[#252C25] transition"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <label className="text-xs font-semibold text-[#1C1F1C] flex justify-between">
+                            <span>Opacity</span>
+                            <span className="font-normal text-[#5A635A]">
+                              {devData.badgeOpacity}%
+                            </span>
+                          </label>
+                          <input
+                            type="range"
+                            min={10}
+                            max={100}
+                            step={5}
+                            value={devData.badgeOpacity}
+                            onChange={(e) =>
+                              setDev({ badgeOpacity: Number(e.target.value) })
+                            }
+                            className="w-full accent-[#252C25]"
+                          />
+                        </div>
+                      </>
+                    )}
                   </ControlGroup>
                 </div>
               )}

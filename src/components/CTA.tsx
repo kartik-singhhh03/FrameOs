@@ -2,7 +2,10 @@ export default function CTA() {
   return (
     <section className="py-24 px-6 relative overflow-hidden bg-[#ECE7E2]">
       <div className="max-w-7xl mx-auto">
-        <div className="relative rounded-3xl overflow-hidden" style={{ background: "#252C25" }}>
+        <div
+          className="relative rounded-3xl overflow-hidden"
+          style={{ background: "#252C25" }}
+        >
           {/* Subtle mesh */}
           <div
             className="absolute inset-0 opacity-20 pointer-events-none"
@@ -15,7 +18,8 @@ export default function CTA() {
           <div
             className="absolute inset-0 opacity-10 pointer-events-none"
             style={{
-              backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
+              backgroundImage:
+                "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
               backgroundSize: "28px 28px",
             }}
           />
@@ -47,14 +51,22 @@ export default function CTA() {
                 href="#pricing"
                 className="bg-white/10 border border-white/20 text-white px-8 py-4 rounded-xl font-semibold text-sm hover:bg-white/20 transition-all duration-200 hover:scale-[1.02] flex items-center gap-2"
               >
-                <span className="text-xs bg-white/20 px-2 py-0.5 rounded font-bold">$5</span>
+                <span className="text-xs bg-white/20 px-2 py-0.5 rounded font-bold">
+                  $5
+                </span>
                 Upgrade to Pro
               </a>
             </div>
 
             {/* Type chips */}
             <div className="flex justify-center gap-3 flex-wrap mb-12">
-              {["Quote Frames", "Announcement Posts", "Product Showcases"].map((label, i) => (
+              {[
+                "Quote Frames",
+                "Dev Screenshots",
+                "Thread Carousels",
+                "Announcement Posts",
+                "Product Showcases",
+              ].map((label, i) => (
                 <div
                   key={i}
                   className="bg-white/10 border border-white/15 rounded-xl px-6 py-3 text-white/80 text-sm font-medium shadow-sm hover:bg-white/15 transition-colors cursor-default"
@@ -88,8 +100,12 @@ export default function CTA() {
                     style={{ background: card.bg }}
                   >
                     <div className="text-center px-4">
-                      <p className="text-white/50 text-[10px] uppercase font-bold tracking-wider mb-1">Frame {i + 1}</p>
-                      <p className="text-white font-semibold text-sm">Beautiful design in seconds</p>
+                      <p className="text-white/50 text-[10px] uppercase font-bold tracking-wider mb-1">
+                        Frame {i + 1}
+                      </p>
+                      <p className="text-white font-semibold text-sm">
+                        Beautiful design in seconds
+                      </p>
                     </div>
                   </div>
                 ))}
