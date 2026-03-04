@@ -82,10 +82,14 @@ export default function RefundPolicyPage() {
           <section>
             <h2 className="text-lg font-bold mb-3">1. Overview</h2>
             <p className="text-sm text-[#3A3D3A] leading-relaxed">
-              FrameOS operates as a digital SaaS product. We want you to be
-              fully satisfied with your subscription. This Refund Policy
-              outlines the conditions under which you may request a refund for
-              your FrameOS Pro subscription, processed via{" "}
+              FrameOS is operated by <strong>Kartik Singh</strong>. We offer a{" "}
+              <strong>
+                14-day no-questions-asked refund policy from the date of
+                purchase with no conditions or exceptions.
+              </strong>{" "}
+              If you are not satisfied with FrameOS Pro for any reason, simply
+              contact us within 14 days of your purchase and we will issue a
+              full refund — no questions asked. Refunds are processed via{" "}
               <a
                 href="https://paddle.com"
                 target="_blank"
@@ -106,54 +110,34 @@ export default function RefundPolicyPage() {
               2. Eligibility for Refund
             </h2>
             <p className="text-sm text-[#3A3D3A] leading-relaxed mb-3">
-              You may be eligible for a full refund if <strong>all</strong> of
-              the following conditions are met:
+              You are eligible for a full refund if:
             </p>
             <ul className="text-sm text-[#3A3D3A] leading-relaxed space-y-2 list-disc list-inside">
               <li>
-                It is your <strong>first subscription payment</strong> to
-                FrameOS Pro.
-              </li>
-              <li>
-                Your refund request is submitted <strong>within 7 days</strong>{" "}
-                of the initial charge.
-              </li>
-              <li>
-                You have not made excessive use of Pro features (e.g., bulk
-                exports of 4K assets).
-              </li>
-              <li>
-                Your account is in good standing and has not violated our Terms
-                &amp; Conditions.
+                Your refund request is submitted{" "}
+                <strong>within 14 days of the purchase date</strong>.
               </li>
             </ul>
+            <p className="text-sm text-[#3A3D3A] leading-relaxed mt-3">
+              That&rsquo;s it. There are <strong>no other conditions</strong>,
+              no usage restrictions, and no exceptions. We trust our customers
+              and stand behind our product.
+            </p>
           </section>
 
           <hr className="border-[#D9D3CC]" />
 
-          {/* 3. Non-refundable */}
+          {/* 3. No Exceptions */}
           <section>
             <h2 className="text-lg font-bold mb-3">
-              3. Non-Refundable Situations
+              3. No Conditions or Exceptions
             </h2>
-            <p className="text-sm text-[#3A3D3A] leading-relaxed mb-3">
-              The following situations are <strong>not eligible</strong> for a
-              refund:
+            <p className="text-sm text-[#3A3D3A] leading-relaxed">
+              Our refund policy is unconditional. We do <strong>not</strong> ask
+              for a reason, evaluate your usage, or impose any restrictions. If
+              you request a refund within 14 days of purchase, you will receive
+              one — full stop.
             </p>
-            <ul className="text-sm text-[#3A3D3A] leading-relaxed space-y-2 list-disc list-inside">
-              <li>Renewal charges after the initial subscription period.</li>
-              <li>Partial billing cycles — we do not prorate unused days.</li>
-              <li>
-                Refund requests submitted more than 7 days after the charge
-                date.
-              </li>
-              <li>Accounts terminated due to Terms of Service violations.</li>
-              <li>
-                Requests citing features that are clearly documented as part of
-                the Free plan only.
-              </li>
-              <li>Change of mind after extensive use of Pro features.</li>
-            </ul>
           </section>
 
           <hr className="border-[#D9D3CC]" />
@@ -241,6 +225,9 @@ export default function RefundPolicyPage() {
           <section>
             <h2 className="text-lg font-bold mb-3">7. Contact Details</h2>
             <div className="text-sm text-[#3A3D3A] space-y-1">
+              <p>
+                <strong>Legal Owner:</strong> Kartik Singh
+              </p>
               <p>
                 <strong>Product:</strong> FrameOS
               </p>

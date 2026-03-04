@@ -464,6 +464,9 @@ export default function PrivacyPolicyPage() {
             <h2 className="text-lg font-bold mb-3">10. Contact Information</h2>
             <div className="text-sm text-[#3A3D3A] space-y-1">
               <p>
+                <strong>Legal Owner:</strong> Kartik Singh
+              </p>
+              <p>
                 <strong>Product:</strong> FrameOS
               </p>
               <p>

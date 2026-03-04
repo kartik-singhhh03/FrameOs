@@ -399,6 +399,9 @@ export default function TermsPage() {
             </p>
             <div className="mt-3 text-sm text-[#3A3D3A] space-y-1">
               <p>
+                <strong>Legal Owner:</strong> Kartik Singh
+              </p>
+              <p>
                 <strong>Product:</strong> FrameOS
               </p>
               <p>
